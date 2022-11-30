@@ -1,0 +1,17 @@
+{
+  "name": "tree-sitter-abc",
+  "version": "0.0.1",
+  "description": "tree-sitter grammar for abc music notation",
+  "main": "bindings/node",
+  "author": "Antoine Balaine",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.17.0"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.7"
+  },
+  "scripts": {
+    "parse-examples": "tree-sitter parse 'examples/**/*' --quiet --stat"
+  }
+}

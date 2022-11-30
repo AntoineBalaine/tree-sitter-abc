@@ -1,0 +1,325 @@
+{
+  "name": "ABC",
+  "rules": {
+    "source_file": {
+      "type": "SYMBOL",
+      "name": "note_construct"
+    },
+    "note_construct": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "note_prefixes"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "note"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "-"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "note": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "pitch"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "rest"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "rhythm"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "octave": {
+      "type": "PATTERN",
+      "value": "'|,"
+    },
+    "alteration": {
+      "type": "PATTERN",
+      "value": "(=|_|\\^|\\^\\^|__|♭|♮|♯|𝄫|𝄪)"
+    },
+    "note_letter": {
+      "type": "PATTERN",
+      "value": "[a-gA-G]"
+    },
+    "pitch": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "alteration"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "note_letter"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "octave"
+          }
+        }
+      ]
+    },
+    "rest": {
+      "type": "PATTERN",
+      "value": "[xz]"
+    },
+    "rhythm": {
+      "type": "PATTERN",
+      "value": "[1-9]*\\/[1-9]+|[\\/><1-9]+|[<>]+|[1-9]+"
+    },
+    "note_prefixes": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "grace_note"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "chord_symbol"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "annotation"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "tuplet_marker"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "decoration"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "grace_note": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\{\\/?"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "pitch"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\}"
+        }
+      ]
+    },
+    "chord_symbol_note": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "note_letter"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "alteration"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "chord_symbol": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "\\\""
+        },
+        {
+          "type": "SYMBOL",
+          "name": "chord_symbol_note"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "chord_type"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "\\/"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "chord_symbol_note"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\\""
+        }
+      ]
+    },
+    "annotation": {
+      "type": "PATTERN",
+      "value": "\\\"[^\\\"\\n]*\\\""
+    },
+    "tuplet_marker": {
+      "type": "PATTERN",
+      "value": "\\(\\d+(((:\\d+){1,2})|(::\\d+))?\\s*"
+    },
+    "decoration": {
+      "type": "SYMBOL",
+      "name": "decoration_shorthand"
+    },
+    "chord_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "minor"
+        },
+        {
+          "type": "STRING",
+          "value": "major"
+        },
+        {
+          "type": "STRING",
+          "value": "diminished"
+        },
+        {
+          "type": "STRING",
+          "value": "augmented"
+        },
+        {
+          "type": "STRING",
+          "value": "suspended"
+        },
+        {
+          "type": "STRING",
+          "value": "7"
+        },
+        {
+          "type": "STRING",
+          "value": "9"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\w+"
+        }
+      ]
+    },
+    "decoration_shorthand": {
+      "type": "PATTERN",
+      "value": "[\\.~HLMOPSTuv]"
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": []
+}
+
