@@ -23,12 +23,12 @@ module.exports = grammar({
 
     pitch: $ => seq(optional($.alteration), $.note_letter, repeat($.octave)),
     alteration: $ => /(=|_|\^|\^\^|__|♭|♮|♯|𝄫|𝄪)/,
-    note_letter: $ => /[a-gA-G]/,
-    octave: $ => /[',]/,
+    note_letter: $ => token.immediate(/[a-gA-G]/),
+    octave: $ => token.immediate(/[',]/),
 
     rest: $ => /[xz]/,
-    multimeasure_rest: $ => seq(choice("Z", "X"), /[0-9]+/),
-    rhythm: $ => /[1-9]*\/[1-9]+|[<>]+|[1-9]+|[\/]+/,
+    multimeasure_rest: $ => seq(choice("Z", "X"), token.immediate(/[0-9]+/)),
+    rhythm: $ => token.immediate(/[1-9]*\/[1-9]+|[<>]+|[1-9]+|[\/]+/),
 
     //note prefixes
     // shouldn't the chord-symbols go before the grace notes?
@@ -39,7 +39,7 @@ module.exports = grammar({
     annotation: $ => /\"[^\"\n]*\"/,
     tuplet_marker: $ => /\(\d+(((:\d+){1,2})(::\d+))?\s*/,
     decoration: $ => $.decoration_shorthand,
-    chord_type: $ => choice("minor", "major", "diminished", "augmented", "suspended", "7", "9", /\w+/),
+    chord_type: $ => token.immediate(choice("minor", "major", "diminished", "augmented", "suspended", "7", "9", /\w+/)),
     decoration_shorthand: $ => /[\.~HLMOPSTuv]/,
 
     //BAR LINES

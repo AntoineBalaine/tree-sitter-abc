@@ -372,12 +372,18 @@
       "value": "(=|_|\\^|\\^\\^|__|♭|♮|♯|𝄫|𝄪)"
     },
     "note_letter": {
-      "type": "PATTERN",
-      "value": "[a-gA-G]"
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[a-gA-G]"
+      }
     },
     "octave": {
-      "type": "PATTERN",
-      "value": "[',]"
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[',]"
+      }
     },
     "rest": {
       "type": "PATTERN",
@@ -400,14 +406,20 @@
           ]
         },
         {
-          "type": "PATTERN",
-          "value": "[0-9]+"
+          "type": "IMMEDIATE_TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "[0-9]+"
+          }
         }
       ]
     },
     "rhythm": {
-      "type": "PATTERN",
-      "value": "[1-9]*\\/[1-9]+|[<>]+|[1-9]+|[\\/]+"
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[1-9]*\\/[1-9]+|[<>]+|[1-9]+|[\\/]+"
+      }
     },
     "grace_note": {
       "type": "SEQ",
@@ -513,41 +525,44 @@
       "name": "decoration_shorthand"
     },
     "chord_type": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "minor"
-        },
-        {
-          "type": "STRING",
-          "value": "major"
-        },
-        {
-          "type": "STRING",
-          "value": "diminished"
-        },
-        {
-          "type": "STRING",
-          "value": "augmented"
-        },
-        {
-          "type": "STRING",
-          "value": "suspended"
-        },
-        {
-          "type": "STRING",
-          "value": "7"
-        },
-        {
-          "type": "STRING",
-          "value": "9"
-        },
-        {
-          "type": "PATTERN",
-          "value": "\\w+"
-        }
-      ]
+      "type": "IMMEDIATE_TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "minor"
+          },
+          {
+            "type": "STRING",
+            "value": "major"
+          },
+          {
+            "type": "STRING",
+            "value": "diminished"
+          },
+          {
+            "type": "STRING",
+            "value": "augmented"
+          },
+          {
+            "type": "STRING",
+            "value": "suspended"
+          },
+          {
+            "type": "STRING",
+            "value": "7"
+          },
+          {
+            "type": "STRING",
+            "value": "9"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\w+"
+          }
+        ]
+      }
     },
     "decoration_shorthand": {
       "type": "PATTERN",

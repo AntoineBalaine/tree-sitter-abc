@@ -119,11 +119,6 @@
     }
   },
   {
-    "type": "chord_type",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "decoration",
     "named": true,
     "fields": {},
@@ -313,14 +308,6 @@
     }
   },
   {
-    "type": "7",
-    "named": false
-  },
-  {
-    "type": "9",
-    "named": false
-  },
-  {
     "type": "X",
     "named": false
   },
@@ -349,24 +336,12 @@
     "named": true
   },
   {
-    "type": "augmented",
-    "named": false
+    "type": "chord_type",
+    "named": true
   },
   {
     "type": "decoration_shorthand",
     "named": true
-  },
-  {
-    "type": "diminished",
-    "named": false
-  },
-  {
-    "type": "major",
-    "named": false
-  },
-  {
-    "type": "minor",
-    "named": false
   },
   {
     "type": "note_letter",
@@ -391,10 +366,6 @@
   {
     "type": "slur_open",
     "named": true
-  },
-  {
-    "type": "suspended",
-    "named": false
   },
   {
     "type": "tuplet_marker",
