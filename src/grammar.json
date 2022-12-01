@@ -2,8 +2,11 @@
   "name": "ABC",
   "rules": {
     "source_file": {
-      "type": "SYMBOL",
-      "name": "music_content"
+      "type": "REPEAT",
+      "content": {
+        "type": "SYMBOL",
+        "name": "music_content"
+      }
     },
     "_space": {
       "type": "PATTERN",
@@ -18,11 +21,11 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "annotation"
+          "name": "beam"
         },
         {
           "type": "SYMBOL",
-          "name": "beam"
+          "name": "annotation"
         },
         {
           "type": "SYMBOL",
@@ -60,41 +63,45 @@
       ]
     },
     "beam": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "nte_or_chrd"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SYMBOL",
-                "name": "nte_or_chrd"
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "nte_or_chrd"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "nte_or_chrd"
+                }
+              },
+              {
+                "type": "REPEAT1",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "`"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "nte_or_chrd"
+                    }
+                  ]
+                }
               }
-            },
-            {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "`"
-                  },
-                  {
-                    "type": "SYMBOL",
-                    "name": "nte_or_chrd"
-                  }
-                ]
-              }
-            }
-          ]
-        }
-      ]
+            ]
+          }
+        ]
+      }
     },
     "slur_open": {
       "type": "STRING",
@@ -123,30 +130,6 @@
                 {
                   "type": "SYMBOL",
                   "name": "chord_symbol"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "annotation"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "tuplet_marker"
                 },
                 {
                   "type": "BLANK"
@@ -204,30 +187,6 @@
                 {
                   "type": "SYMBOL",
                   "name": "chord_symbol"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "annotation"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "tuplet_marker"
                 },
                 {
                   "type": "BLANK"
@@ -316,18 +275,6 @@
             "type": "SYMBOL",
             "name": "grace_note"
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "annotation"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
         },
         {
           "type": "CHOICE",

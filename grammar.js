@@ -5,25 +5,25 @@ module.exports = grammar({
   extras: $ => [$._space, $.newline],
   rules: {
     // TODO: add the actual grammar rules
-    source_file: $ => $.music_content,
+    source_file: $ => repeat($.music_content),
 
     _space: _ => / /,
     newline: _ => /\n/,
     // body
-    music_content: $ => choice($.annotation, $.beam, $.nte_or_chrd, $.slur_open, $.slur_close, $.tuplet_marker, $.multimeasure_rest),
+    music_content: $ => choice($.beam, $.annotation, $.nte_or_chrd, $.slur_open, $.slur_close, $.tuplet_marker, $.multimeasure_rest),
 
     //notes
     //the note prefixes can't be included as a rule, since they will match an empty string
     nte_or_chrd: $ => choice($.note_construct, $.chord_cstrct),
-    beam: $ => seq($.nte_or_chrd, choice(repeat1($.nte_or_chrd), repeat1(seq("`", $.nte_or_chrd)))),
+    beam: $ => prec(1, seq($.nte_or_chrd, choice(repeat1($.nte_or_chrd), repeat1(seq("`", $.nte_or_chrd))))),
 
     slur_open: $ => "(",
     slur_close: $ => ")",
-    note_construct: $ => seq(seq(repeat($.grace_note), optional($.chord_symbol), optional($.annotation), optional($.tuplet_marker), optional($.decoration)), $.note, optional(/-/)),
-    chord_cstrct: $ => seq(seq(repeat($.grace_note), optional($.chord_symbol), optional($.annotation), optional($.tuplet_marker), optional($.decoration)), "[", repeat1($.chord_note), "]", optional($.rhythm)),
+    note_construct: $ => seq(seq(repeat($.grace_note), optional($.chord_symbol), optional($.decoration)), $.note, optional(/-/)),
+    chord_cstrct: $ => seq(seq(repeat($.grace_note), optional($.chord_symbol), optional($.decoration)), "[", repeat1($.chord_note), "]", optional($.rhythm)),
 
     note: $ => seq(choice($.pitch, $.rest), optional($.rhythm)),
-    chord_note: $ => seq(repeat($.grace_note), optional($.annotation), optional($.decoration), $.note),
+    chord_note: $ => seq(repeat($.grace_note), optional($.decoration), $.note),
 
     pitch: $ => seq(optional($.alteration), $.note_letter, repeat($.octave)),
     alteration: $ => /(=|_|\^|\^\^|__|♭|♮|♯|𝄫|𝄪)/,

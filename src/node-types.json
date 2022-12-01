@@ -23,10 +23,6 @@
       "required": true,
       "types": [
         {
-          "type": "annotation",
-          "named": true
-        },
-        {
           "type": "chord_note",
           "named": true
         },
@@ -45,10 +41,6 @@
         {
           "type": "rhythm",
           "named": true
-        },
-        {
-          "type": "tuplet_marker",
-          "named": true
         }
       ]
     }
@@ -61,10 +53,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "annotation",
-          "named": true
-        },
         {
           "type": "decoration",
           "named": true
@@ -224,10 +212,6 @@
       "required": true,
       "types": [
         {
-          "type": "annotation",
-          "named": true
-        },
-        {
           "type": "chord_symbol",
           "named": true
         },
@@ -241,10 +225,6 @@
         },
         {
           "type": "note",
-          "named": true
-        },
-        {
-          "type": "tuplet_marker",
           "named": true
         }
       ]
@@ -297,8 +277,8 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
           "type": "music_content",
