@@ -3,26 +3,121 @@ module.exports = grammar({
 
   rules: {
     // TODO: add the actual grammar rules
-    source_file: $ => $.note_construct,
+    source_file: $ => $.music_content,
+
+    // body
+    music_content: $ => choice($.annotation, $.beam, $.nte_or_chrd, $.slur_open, $.slur_close, $.tuplet_marker, $.multimeasure_rest),
+
     //notes
-    note_construct: $ => seq($.note_prefixes, $.note, optional(/-/)),
+    //the note prefixes can't be included as a rule, since they will match an empty string
+    nte_or_chrd: $ => choice($.note_construct, $.chord_cstrct),
+    beam: $ => seq($.nte_or_chrd, choice(repeat1($.nte_or_chrd), repeat1(seq("`", $.nte_or_chrd)))),
+
+    slur_open: $ => "(",
+    slur_close: $ => ")",
+    note_construct: $ => seq(seq(repeat($.grace_note), optional($.chord_symbol), optional($.annotation), optional($.tuplet_marker), optional($.decoration)), $.note, optional(/-/)),
+    chord_cstrct: $ => seq(seq(repeat($.grace_note), optional($.chord_symbol), optional($.annotation), optional($.tuplet_marker), optional($.decoration)), "[", repeat1($.chord_note), "]", optional($.rhythm)),
+
     note: $ => seq(choice($.pitch, $.rest), optional($.rhythm)),
-    octave: $ => /'|,/,
+    chord_note: $ => seq(repeat($.grace_note), optional($.annotation), optional($.decoration), $.note),
+
+    pitch: $ => seq(optional($.alteration), $.note_letter, repeat($.octave)),
     alteration: $ => /(=|_|\^|\^\^|__|♭|♮|♯|𝄫|𝄪)/,
     note_letter: $ => /[a-gA-G]/,
-    pitch: $ => seq(optional($.alteration), $.note_letter, repeat($.octave)),
+    octave: $ => /[',]/,
+
     rest: $ => /[xz]/,
-    rhythm: $ => /[1-9]*\/[1-9]+|[\/><1-9]+|[<>]+|[1-9]+/,
+    multimeasure_rest: $ => seq(choice("Z", "X"), /[0-9]+/),
+    rhythm: $ => /[1-9]*\/[1-9]+|[<>]+|[1-9]+|[\/]+/,
 
     //note prefixes
-    note_prefixes: $ => seq(repeat($.grace_note), optional($.chord_symbol), optional($.annotation), optional($.tuplet_marker), optional($.decoration)),
-    grace_note: $ => seq(/\{\/?/, $.pitch, /\}/),
+    // shouldn't the chord-symbols go before the grace notes?
+    // note_prefixes: $ => seq(repeat($.grace_note), optional($.chord_symbol), optional($.annotation), optional($.tuplet_marker), optional($.decoration)),
+    grace_note: $ => seq(/\{(\/)?/, repeat1($.pitch), /\}/),
     chord_symbol_note: $ => seq($.note_letter, optional($.alteration)),
     chord_symbol: $ => seq(/\"/, $.chord_symbol_note, optional($.chord_type), optional(seq(/\//, $.chord_symbol_note)), /\"/),
     annotation: $ => /\"[^\"\n]*\"/,
-    tuplet_marker: $ => /\(\d+(((:\d+){1,2})|(::\d+))?\s*/,
+    tuplet_marker: $ => /\(\d+(((:\d+){1,2})(::\d+))?\s*/,
     decoration: $ => $.decoration_shorthand,
     chord_type: $ => choice("minor", "major", "diminished", "augmented", "suspended", "7", "9", /\w+/),
     decoration_shorthand: $ => /[\.~HLMOPSTuv]/,
+
+    //BAR LINES
+
+    // Nth_ending: $ => seq($.nth_ending_number, $.music_content,
+    //   choice($.bar_line, $.thin_double_bar_line
+    //     , $.end_of_repeated_section, $.close_thin_thick_double_bar_line, $.open_thick_thin_double_bar_line)),
+    // variant_ending: $ => seq($.parts_line, /\n/, repeat1($.Nth_ending)), // TBFinished: add music inside the bars,
+
+    // nth_ending_number: $ => seq("[", /[0-9]/, repeat(seq(choice(",", "-"), /[0-9]/))),
+    // bar_line: $ => "",
+    // close_thin_thick_double_bar_line: $ => "]",
+    // thin_double_bar_line: $ => "|",
+    // open_thick_thin_double_bar_line: $ => "[",
+    // start_of_repeated_section: $ => ":",
+    // end_of_repeated_section: $ => ":",
+    // start_end_of_two_repeated_sections: $ => "::",
+    // generic_bar_line: $ => choice($.thin_double_bar_line, $.close_thin_thick_double_bar_line,
+    //   $.open_thick_thin_double_bar_line,
+    //   $.start_of_repeated_section, $.end_of_repeated_section,
+    //   $.start_end_of_two_repeated_sections, $.first_repeat_bar, $.second_repeat_bar, $.bar_line),
+    // first_repeat_bar: $ => seq($.bar_line, optional(seq(/\s/, "[")), /[0-9]+/),
+    // second_repeat_bar: $ => seq(($.end_of_repeated_section), optional(seq(/\s/, "[")), /[0-9]+/),
+
+    // // INFO LINES
+    // part_line_content: $ => choice(repeat1($.sections_group), repeat1($.section_name)),
+    // parts_line: $ => seq("P:", repeat1($.part_line_content)),
+
+    // section_name: $ => seq(optional("."), /\w+/, /[0-9]*/),
+    // sections_group: $ => seq((optional("."), "(", repeat1(choice($.sections_group, $.section_name)), ")", /[0-9]*/)),
+
+
+    // body_inline_info: $ => ("[", choice(
+    //   $.instruction,
+    //   $.key,
+    //   $.macros,
+    //   $.meter,
+    //   $.notes,
+    //   $.parts_line,
+    //   $.remark,
+    //   $.rhythm_line,
+    //   //.symbol_line,
+    //   $.tempo,
+    //   $.unit_note_length,
+    //   //$.user_defined,
+    //   $.voice
+    // ), "]"),
+
+    // TEXT: $ => /[^\]]*/,
+
+    // abc_version: $ => seq("%abc-", /[0-9]/, repeat(seq(".", /[0-9]/))),
+    // area: $ => seq("A:", $.TEXT),
+    // book: $ => seq("B:", $.TEXT),
+    // composer: $ => seq("C:", $.TEXT),
+    // discography: $ => seq("D:", $.TEXT),
+    // file: $ => seq("F:", $.TEXT),
+    // group: $ => seq("G:", $.TEXT),
+    // history: $ => seq("H:", $.TEXT),
+    // instruction: $ => seq("I:", $.TEXT),
+    // key: $ => seq("K:", $.TEXT),
+    // macros: $ => seq("m:", $.TEXT),
+    // meter: $ => seq("M:", $.TEXT),
+    // notes: $ => seq("N:", $.TEXT),
+    // origin: $ => seq("O:", $.TEXT),
+    // parts_line: $ => seq("P:", $.part_line_content),
+    // reference_number: $ => seq("X:", /[0-9]/),
+    // remark: $ => seq("r:", $.TEXT),
+    // rhythm_line: $ => seq("R:", $.TEXT),
+    // source: $ => seq("S:", $.TEXT),
+    // //symbol_line: $ => seq("s:", (symbolchord_symbol | annotation | generic_bar_line | note_skip) + ),
+    // tempo: $ => seq("Q:", $.TEXT),
+    // transcription: $ => seq("Z:", $.TEXT),
+    // tune_title: $ => seq("T:", $.TEXT),
+    // unit_note_length: $ => seq("L:", $.TEXT),
+    // //user_defined: $ => seq("U:", choice(/[h-w]/, /H-W/), "=", symbol),
+    // voice: $ => seq("V:", $.TEXT),
+    // //words_line: $ => seq("w:", .lyric_text + , /\n/, (plus, ":", lyric_text + ) * ),
+    // words_postbody: $ => seq("W:", $.TEXT),
+
   }
 });

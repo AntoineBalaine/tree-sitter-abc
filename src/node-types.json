@@ -1,5 +1,203 @@
 [
   {
+    "type": "beam",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "nte_or_chrd",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "chord_cstrct",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "chord_note",
+          "named": true
+        },
+        {
+          "type": "chord_symbol",
+          "named": true
+        },
+        {
+          "type": "decoration",
+          "named": true
+        },
+        {
+          "type": "grace_note",
+          "named": true
+        },
+        {
+          "type": "rhythm",
+          "named": true
+        },
+        {
+          "type": "tuplet_marker",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "chord_note",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "decoration",
+          "named": true
+        },
+        {
+          "type": "grace_note",
+          "named": true
+        },
+        {
+          "type": "note",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "chord_symbol",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "chord_symbol_note",
+          "named": true
+        },
+        {
+          "type": "chord_type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "chord_symbol_note",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "alteration",
+          "named": true
+        },
+        {
+          "type": "note_letter",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "chord_type",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "decoration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "decoration_shorthand",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "grace_note",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "pitch",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "multimeasure_rest",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "music_content",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "beam",
+          "named": true
+        },
+        {
+          "type": "multimeasure_rest",
+          "named": true
+        },
+        {
+          "type": "nte_or_chrd",
+          "named": true
+        },
+        {
+          "type": "slur_close",
+          "named": true
+        },
+        {
+          "type": "slur_open",
+          "named": true
+        },
+        {
+          "type": "tuplet_marker",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "note",
     "named": true,
     "fields": {},
@@ -23,15 +221,73 @@
     }
   },
   {
+    "type": "note_construct",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "chord_symbol",
+          "named": true
+        },
+        {
+          "type": "decoration",
+          "named": true
+        },
+        {
+          "type": "grace_note",
+          "named": true
+        },
+        {
+          "type": "note",
+          "named": true
+        },
+        {
+          "type": "tuplet_marker",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "nte_or_chrd",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "chord_cstrct",
+          "named": true
+        },
+        {
+          "type": "note_construct",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "pitch",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "alteration",
+          "named": true
+        },
+        {
+          "type": "note_letter",
           "named": true
         },
         {
@@ -50,14 +306,70 @@
       "required": true,
       "types": [
         {
-          "type": "note",
+          "type": "music_content",
           "named": true
         }
       ]
     }
   },
   {
+    "type": "7",
+    "named": false
+  },
+  {
+    "type": "9",
+    "named": false
+  },
+  {
+    "type": "X",
+    "named": false
+  },
+  {
+    "type": "Z",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "`",
+    "named": false
+  },
+  {
     "type": "alteration",
+    "named": true
+  },
+  {
+    "type": "annotation",
+    "named": true
+  },
+  {
+    "type": "augmented",
+    "named": false
+  },
+  {
+    "type": "decoration_shorthand",
+    "named": true
+  },
+  {
+    "type": "diminished",
+    "named": false
+  },
+  {
+    "type": "major",
+    "named": false
+  },
+  {
+    "type": "minor",
+    "named": false
+  },
+  {
+    "type": "note_letter",
     "named": true
   },
   {
@@ -70,6 +382,22 @@
   },
   {
     "type": "rhythm",
+    "named": true
+  },
+  {
+    "type": "slur_close",
+    "named": true
+  },
+  {
+    "type": "slur_open",
+    "named": true
+  },
+  {
+    "type": "suspended",
+    "named": false
+  },
+  {
+    "type": "tuplet_marker",
     "named": true
   }
 ]

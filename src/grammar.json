@@ -3,14 +3,161 @@
   "rules": {
     "source_file": {
       "type": "SYMBOL",
-      "name": "note_construct"
+      "name": "music_content"
+    },
+    "music_content": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "annotation"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "beam"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "nte_or_chrd"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "slur_open"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "slur_close"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "tuplet_marker"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "multimeasure_rest"
+        }
+      ]
+    },
+    "nte_or_chrd": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "note_construct"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "chord_cstrct"
+        }
+      ]
+    },
+    "beam": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "nte_or_chrd"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "nte_or_chrd"
+              }
+            },
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "`"
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "nte_or_chrd"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "slur_open": {
+      "type": "STRING",
+      "value": "("
+    },
+    "slur_close": {
+      "type": "STRING",
+      "value": ")"
     },
     "note_construct": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "note_prefixes"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "grace_note"
+              }
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "chord_symbol"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "annotation"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "tuplet_marker"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "decoration"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "SYMBOL",
@@ -22,6 +169,98 @@
             {
               "type": "PATTERN",
               "value": "-"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "chord_cstrct": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "grace_note"
+              }
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "chord_symbol"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "annotation"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "tuplet_marker"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "decoration"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "chord_note"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "rhythm"
             },
             {
               "type": "BLANK"
@@ -60,17 +299,45 @@
         }
       ]
     },
-    "octave": {
-      "type": "PATTERN",
-      "value": "'|,"
-    },
-    "alteration": {
-      "type": "PATTERN",
-      "value": "(=|_|\\^|\\^\\^|__|♭|♮|♯|𝄫|𝄪)"
-    },
-    "note_letter": {
-      "type": "PATTERN",
-      "value": "[a-gA-G]"
+    "chord_note": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "grace_note"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "annotation"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "decoration"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "note"
+        }
+      ]
     },
     "pitch": {
       "type": "SEQ",
@@ -100,84 +367,61 @@
         }
       ]
     },
+    "alteration": {
+      "type": "PATTERN",
+      "value": "(=|_|\\^|\\^\\^|__|♭|♮|♯|𝄫|𝄪)"
+    },
+    "note_letter": {
+      "type": "PATTERN",
+      "value": "[a-gA-G]"
+    },
+    "octave": {
+      "type": "PATTERN",
+      "value": "[',]"
+    },
     "rest": {
       "type": "PATTERN",
       "value": "[xz]"
     },
-    "rhythm": {
-      "type": "PATTERN",
-      "value": "[1-9]*\\/[1-9]+|[\\/><1-9]+|[<>]+|[1-9]+"
-    },
-    "note_prefixes": {
+    "multimeasure_rest": {
       "type": "SEQ",
       "members": [
         {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "grace_note"
-          }
-        },
-        {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "chord_symbol"
+              "type": "STRING",
+              "value": "Z"
             },
             {
-              "type": "BLANK"
+              "type": "STRING",
+              "value": "X"
             }
           ]
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "annotation"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "tuplet_marker"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "decoration"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "PATTERN",
+          "value": "[0-9]+"
         }
       ]
+    },
+    "rhythm": {
+      "type": "PATTERN",
+      "value": "[1-9]*\\/[1-9]+|[<>]+|[1-9]+|[\\/]+"
     },
     "grace_note": {
       "type": "SEQ",
       "members": [
         {
           "type": "PATTERN",
-          "value": "\\{\\/?"
+          "value": "\\{(\\/)?"
         },
         {
-          "type": "SYMBOL",
-          "name": "pitch"
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "pitch"
+          }
         },
         {
           "type": "PATTERN",
@@ -262,7 +506,7 @@
     },
     "tuplet_marker": {
       "type": "PATTERN",
-      "value": "\\(\\d+(((:\\d+){1,2})|(::\\d+))?\\s*"
+      "value": "\\(\\d+(((:\\d+){1,2})(::\\d+))?\\s*"
     },
     "decoration": {
       "type": "SYMBOL",
