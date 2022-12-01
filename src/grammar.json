@@ -5,6 +5,14 @@
       "type": "SYMBOL",
       "name": "music_content"
     },
+    "_space": {
+      "type": "PATTERN",
+      "value": " "
+    },
+    "newline": {
+      "type": "PATTERN",
+      "value": "\\n"
+    },
     "music_content": {
       "type": "CHOICE",
       "members": [
@@ -571,8 +579,12 @@
   },
   "extras": [
     {
-      "type": "PATTERN",
-      "value": "\\s"
+      "type": "SYMBOL",
+      "name": "_space"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "newline"
     }
   ],
   "conflicts": [],

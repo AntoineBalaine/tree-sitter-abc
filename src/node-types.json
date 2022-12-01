@@ -344,6 +344,10 @@
     "named": true
   },
   {
+    "type": "newline",
+    "named": true
+  },
+  {
     "type": "note_letter",
     "named": true
   },

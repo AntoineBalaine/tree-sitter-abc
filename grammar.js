@@ -1,10 +1,14 @@
 module.exports = grammar({
   name: 'ABC',
 
+
+  extras: $ => [$._space, $.newline],
   rules: {
     // TODO: add the actual grammar rules
     source_file: $ => $.music_content,
 
+    _space: _ => / /,
+    newline: _ => /\n/,
     // body
     music_content: $ => choice($.annotation, $.beam, $.nte_or_chrd, $.slur_open, $.slur_close, $.tuplet_marker, $.multimeasure_rest),
 
