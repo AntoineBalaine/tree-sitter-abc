@@ -5,7 +5,7 @@ module.exports = grammar({
   extras: $ => [$._space, $.newline],
   rules: {
     // TODO: add the actual grammar rules
-    source_file: $ => repeat($.music_content),
+    source_file: $ => $.body_inline_info,
 
     _space: _ => / /,
     newline: _ => /\n/,
@@ -85,23 +85,24 @@ module.exports = grammar({
     // sections_group: $ => seq((optional("."), "(", repeat1(choice($.sections_group, $.section_name)), ")", /[0-9]*/)),
 
 
-    // body_inline_info: $ => ("[", choice(
-    //   $.instruction,
-    //   $.key,
-    //   $.macros,
-    //   $.meter,
-    //   $.notes,
-    //   $.parts_line,
-    //   $.remark,
-    //   $.rhythm_line,
-    //   //.symbol_line,
-    //   $.tempo,
-    //   $.unit_note_length,
-    //   //$.user_defined,
-    //   $.voice
-    // ), "]"),
+    test_this: $ => /\[[KT]:[^\]]*\]/,
+    body_inline_info: $ => seq("[", choice(
+      //   $.instruction,
+      $.key,
+      //   $.macros,
+      //   $.meter,
+      //   $.notes,
+      //   $.parts_line,
+      //   $.remark,
+      //   $.rhythm_line,
+      //   //.symbol_line,
+      $.tempo,
+      //   $.unit_note_length,
+      //   //$.user_defined,
+      //   $.voice
+    ), "]"),
 
-    // TEXT: $ => /[^\]]*/,
+    TEXT: $ => /[^\]]*/,
 
     // abc_version: $ => seq("%abc-", /[0-9]/, repeat(seq(".", /[0-9]/))),
     // area: $ => seq("A:", $.TEXT),
@@ -112,7 +113,7 @@ module.exports = grammar({
     // group: $ => seq("G:", $.TEXT),
     // history: $ => seq("H:", $.TEXT),
     // instruction: $ => seq("I:", $.TEXT),
-    // key: $ => seq("K:", $.TEXT),
+    key: $ => seq("K:", $.TEXT),
     // macros: $ => seq("m:", $.TEXT),
     // meter: $ => seq("M:", $.TEXT),
     // notes: $ => seq("N:", $.TEXT),
@@ -123,7 +124,7 @@ module.exports = grammar({
     // rhythm_line: $ => seq("R:", $.TEXT),
     // source: $ => seq("S:", $.TEXT),
     // //symbol_line: $ => seq("s:", (symbolchord_symbol | annotation | generic_bar_line | note_skip) + ),
-    // tempo: $ => seq("Q:", $.TEXT),
+    tempo: $ => seq("Q:", $.TEXT),
     // transcription: $ => seq("Z:", $.TEXT),
     // tune_title: $ => seq("T:", $.TEXT),
     // unit_note_length: $ => seq("L:", $.TEXT),

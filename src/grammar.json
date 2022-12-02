@@ -2,11 +2,8 @@
   "name": "ABC",
   "rules": {
     "source_file": {
-      "type": "REPEAT",
-      "content": {
-        "type": "SYMBOL",
-        "name": "music_content"
-      }
+      "type": "SYMBOL",
+      "name": "body_inline_info"
     },
     "_space": {
       "type": "PATTERN",
@@ -745,6 +742,66 @@
         {
           "type": "PATTERN",
           "value": "[0-9]+"
+        }
+      ]
+    },
+    "test_this": {
+      "type": "PATTERN",
+      "value": "\\[[KT]:[^\\]]*\\]"
+    },
+    "body_inline_info": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "key"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "tempo"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "TEXT": {
+      "type": "PATTERN",
+      "value": "[^\\]]*"
+    },
+    "key": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "K:"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "TEXT"
+        }
+      ]
+    },
+    "tempo": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "Q:"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "TEXT"
         }
       ]
     }
