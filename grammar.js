@@ -2,14 +2,28 @@ module.exports = grammar({
   name: 'ABC',
 
 
-  extras: $ => [$._space, $.newline],
+  extras: $ => [$._space, $.NEWLINE],
   rules: {
     // TODO: add the actual grammar rules
     source_file: $ => $.body_inline_info,
 
     _space: _ => / /,
-    newline: _ => /\n/,
-    // body
+    NEWLINE: _ => /\n/,
+    TEXTLINE: $ => seq($.TEXT, $.NEWLINE),
+
+
+
+
+
+    // TYPES OF LINES
+    COMMENTLINE: $ => seq(/%[^%]/, $.TEXTLINE),
+    stylesheet_directives: $ => seq("%%", $.TEXTLINE),
+    MUSIC_CODE: $ => seq(repeat1(choice($.bar, $.music_content)), optional(choice("\\", "$")), choice($.COMMENTLINE, $.NEWLINE)),
+
+    // FILE STRUCTURE
+    tune_body: $ => seq(repeat(choice($.MUSIC_CODE, $.body_info_line, $.COMMENTLINE, $.stylesheet_directives))),
+
+    // BODY
     music_content: $ => choice(
       $.beam,
       $.annotation,
@@ -21,7 +35,7 @@ module.exports = grammar({
       $.Nth_ending
     ),
 
-    //notes
+    //NOTES
     //the note prefixes can't be included as a rule, since they will match an empty string
     nte_or_chrd: $ => choice($.note_construct, $.chord_cstrct),
     beam: $ => prec(1, seq($.nte_or_chrd, choice(repeat1($.nte_or_chrd), repeat1(seq("`", $.nte_or_chrd))))),
@@ -57,6 +71,7 @@ module.exports = grammar({
 
     //BAR LINES
 
+    bar: $ => seq(repeat($.music_content), $.generic_bar_line),
     Nth_ending: $ => seq($.nth_ending_number, $.music_content,
       choice($.bar_line, $.thin_double_bar_line
         , $.end_of_repeated_section, $.close_thin_thick_double_bar_line, $.open_thick_thin_double_bar_line)),
@@ -77,61 +92,74 @@ module.exports = grammar({
     first_repeat_bar: $ => seq($.bar_line, optional(seq(/\s/, "[")), /[0-9]+/),
     second_repeat_bar: $ => seq(($.end_of_repeated_section), optional(seq(/\s/, "[")), /[0-9]+/),
 
+    //LYRICS
+    lyric_line: $ => seq($.words_postbody, $.NEWLINE),
+    lyric_section: $ => repeat1($.lyric_line),
+
+    lyric_syllable: $ => seq(/\w+/),
+    verse_number: $ => seq(/\d/, "."),
+    lyric_text: $ => choice($.verse_number, $.lyric_syllable,
+      $.bar_line, /-/, /_/,
+      /\~/, /\*/),
+
+    //SYMBOLS
+    symbol: $ => seq("!trill!", "!trill(!", "!trill)!", "!lowermordent!", "!uppermordent!", "!mordent!", "!pralltriller!", "!roll!", "!turn!", "!turnx!", "!invertedturn!", "!invertedturnx!", "!arpeggio!", "!>!", "!accent!", "!emphasis!", "!fermata!", "!invertedfermata!", "!tenuto!", "!0! - !5!", "!+!", "!plus!", "!snap!", "!slide!", "!wedge!", "!upbow!", "!downbow!", "!open!", "!thumb!", "!breath!", "!pppp!", "!ppp!", "!pp!", "!p!", "!mp!", "!mf!", "!f!", "!ff!", "!fff!", "!ffff!", "!sfz!", "!crescendo(!", "!<(!", "!crescendo)!", "!<)!", "!diminuendo(!", "!>(!", "!diminuendo)!", "!>)!", "!segno!", "!coda!", "!D.S.!", "!D.C.!", "!dacoda!", "!dacapo!", "!fine!", "!shortphrase!", "!mediumphrase!", "!longphrase!"),
+
+
     // // INFO LINES
-    // part_line_content: $ => choice(repeat1($.sections_group), repeat1($.section_name)),
-    // parts_line: $ => seq("P:", repeat1($.part_line_content)),
+    part_line_content: $ => choice(repeat1($.sections_group), repeat1($.section_name)),
+    parts_line: $ => seq("P:", repeat1($.part_line_content)),
 
-    // section_name: $ => seq(optional("."), /\w+/, /[0-9]*/),
-    // sections_group: $ => seq((optional("."), "(", repeat1(choice($.sections_group, $.section_name)), ")", /[0-9]*/)),
+    section_name: $ => seq(optional("."), /\w+/, /[0-9]*/),
+    sections_group: $ => seq((optional("."), "(", repeat1(choice($.sections_group, $.section_name)), ")", /[0-9]*/)),
 
 
-    test_this: $ => /\[[KT]:[^\]]*\]/,
     body_inline_info: $ => seq("[", choice(
       //   $.instruction,
       $.key,
-      //   $.macros,
-      //   $.meter,
-      //   $.notes,
-      //   $.parts_line,
-      //   $.remark,
-      //   $.rhythm_line,
-      //   //.symbol_line,
+      $.macros,
+      $.meter,
+      $.notes,
+      $.parts_line,
+      $.remark,
+      $.rhythm_line,
+      $.symbol_line,
       $.tempo,
-      //   $.unit_note_length,
-      //   //$.user_defined,
-      //   $.voice
+      $.unit_note_length,
+      $.user_defined,
+      $.voice
     ), "]"),
 
     TEXT: $ => /[^\]]*/,
 
-    // abc_version: $ => seq("%abc-", /[0-9]/, repeat(seq(".", /[0-9]/))),
-    // area: $ => seq("A:", $.TEXT),
-    // book: $ => seq("B:", $.TEXT),
-    // composer: $ => seq("C:", $.TEXT),
-    // discography: $ => seq("D:", $.TEXT),
-    // file: $ => seq("F:", $.TEXT),
-    // group: $ => seq("G:", $.TEXT),
-    // history: $ => seq("H:", $.TEXT),
-    // instruction: $ => seq("I:", $.TEXT),
+    abc_version: $ => seq("%abc-", /[0-9]/, repeat(seq(".", /[0-9]/))),
+    area: $ => seq("A:", $.TEXT),
+    book: $ => seq("B:", $.TEXT),
+    composer: $ => seq("C:", $.TEXT),
+    discography: $ => seq("D:", $.TEXT),
+    file: $ => seq("F:", $.TEXT),
+    group: $ => seq("G:", $.TEXT),
+    history: $ => seq("H:", $.TEXT),
+    instruction: $ => seq("I:", $.TEXT),
     key: $ => seq("K:", $.TEXT),
-    // macros: $ => seq("m:", $.TEXT),
-    // meter: $ => seq("M:", $.TEXT),
-    // notes: $ => seq("N:", $.TEXT),
-    // origin: $ => seq("O:", $.TEXT),
-    // parts_line: $ => seq("P:", $.part_line_content),
-    // reference_number: $ => seq("X:", /[0-9]/),
-    // remark: $ => seq("r:", $.TEXT),
-    // rhythm_line: $ => seq("R:", $.TEXT),
-    // source: $ => seq("S:", $.TEXT),
-    // //symbol_line: $ => seq("s:", (symbolchord_symbol | annotation | generic_bar_line | note_skip) + ),
+    macros: $ => seq("m:", $.TEXT),
+    meter: $ => seq("M:", $.TEXT),
+    notes: $ => seq("N:", $.TEXT),
+    origin: $ => seq("O:", $.TEXT),
+    parts_line: $ => seq("P:", $.part_line_content),
+    reference_number: $ => seq("X:", /[0-9]/),
+    remark: $ => seq("r:", $.TEXT),
+    rhythm_line: $ => seq("R:", $.TEXT),
+    source: $ => seq("S:", $.TEXT),
+    symbol_line: $ => seq("s:", repeat1(choice($.symbol, $.chord_symbol, $.annotation, $.generic_bar_line, /\*/))),
     tempo: $ => seq("Q:", $.TEXT),
-    // transcription: $ => seq("Z:", $.TEXT),
-    // tune_title: $ => seq("T:", $.TEXT),
-    // unit_note_length: $ => seq("L:", $.TEXT),
-    // //user_defined: $ => seq("U:", choice(/[h-w]/, /H-W/), "=", symbol),
-    // voice: $ => seq("V:", $.TEXT),
-    // //words_line: $ => seq("w:", .lyric_text + , /\n/, (plus, ":", lyric_text + ) * ),
-    // words_postbody: $ => seq("W:", $.TEXT),
+    transcription: $ => seq("Z:", $.TEXT),
+    tune_title: $ => seq("T:", $.TEXT),
+    unit_note_length: $ => seq("L:", $.TEXT),
+    user_defined: $ => seq("U:", choice(/[h-w]/, /H-W/), "=", $.symbol),
+    voice: $ => seq("V:", $.TEXT),
+    words_line: $ => seq("w:", repeat1($.lyric_text), $.NEWLINE, repeat(seq(/\+:/, repeat1($.lyric_text)))),
+    words_postbody: $ => seq("W:", $.TEXT),
 
   }
 });
