@@ -10,7 +10,16 @@ module.exports = grammar({
     _space: _ => / /,
     newline: _ => /\n/,
     // body
-    music_content: $ => choice($.beam, $.annotation, $.nte_or_chrd, $.slur_open, $.slur_close, $.tuplet_marker, $.multimeasure_rest),
+    music_content: $ => choice(
+      $.beam,
+      $.annotation,
+      $.nte_or_chrd,
+      $.slur_open,
+      $.slur_close,
+      $.tuplet_marker,
+      $.multimeasure_rest,
+      $.Nth_ending
+    ),
 
     //notes
     //the note prefixes can't be included as a rule, since they will match an empty string
@@ -48,25 +57,25 @@ module.exports = grammar({
 
     //BAR LINES
 
-    // Nth_ending: $ => seq($.nth_ending_number, $.music_content,
-    //   choice($.bar_line, $.thin_double_bar_line
-    //     , $.end_of_repeated_section, $.close_thin_thick_double_bar_line, $.open_thick_thin_double_bar_line)),
+    Nth_ending: $ => seq($.nth_ending_number, $.music_content,
+      choice($.bar_line, $.thin_double_bar_line
+        , $.end_of_repeated_section, $.close_thin_thick_double_bar_line, $.open_thick_thin_double_bar_line)),
     // variant_ending: $ => seq($.parts_line, /\n/, repeat1($.Nth_ending)), // TBFinished: add music inside the bars,
 
-    // nth_ending_number: $ => seq("[", /[0-9]/, repeat(seq(choice(",", "-"), /[0-9]/))),
-    // bar_line: $ => "",
-    // close_thin_thick_double_bar_line: $ => "]",
-    // thin_double_bar_line: $ => "|",
-    // open_thick_thin_double_bar_line: $ => "[",
-    // start_of_repeated_section: $ => ":",
-    // end_of_repeated_section: $ => ":",
-    // start_end_of_two_repeated_sections: $ => "::",
-    // generic_bar_line: $ => choice($.thin_double_bar_line, $.close_thin_thick_double_bar_line,
-    //   $.open_thick_thin_double_bar_line,
-    //   $.start_of_repeated_section, $.end_of_repeated_section,
-    //   $.start_end_of_two_repeated_sections, $.first_repeat_bar, $.second_repeat_bar, $.bar_line),
-    // first_repeat_bar: $ => seq($.bar_line, optional(seq(/\s/, "[")), /[0-9]+/),
-    // second_repeat_bar: $ => seq(($.end_of_repeated_section), optional(seq(/\s/, "[")), /[0-9]+/),
+    nth_ending_number: $ => seq("[", /[0-9]/, optional(repeat(seq(choice(",", "-"), /[0-9]/)))),
+    bar_line: $ => "|",
+    close_thin_thick_double_bar_line: $ => "|]",
+    thin_double_bar_line: $ => "||",
+    open_thick_thin_double_bar_line: $ => "[|",
+    start_of_repeated_section: $ => "|:",
+    end_of_repeated_section: $ => ":|",
+    start_end_of_two_repeated_sections: $ => "::",
+    generic_bar_line: $ => choice($.thin_double_bar_line, $.close_thin_thick_double_bar_line,
+      $.open_thick_thin_double_bar_line,
+      $.start_of_repeated_section, $.end_of_repeated_section,
+      $.start_end_of_two_repeated_sections, $.first_repeat_bar, $.second_repeat_bar, $.bar_line),
+    first_repeat_bar: $ => seq($.bar_line, optional(seq(/\s/, "[")), /[0-9]+/),
+    second_repeat_bar: $ => seq(($.end_of_repeated_section), optional(seq(/\s/, "[")), /[0-9]+/),
 
     // // INFO LINES
     // part_line_content: $ => choice(repeat1($.sections_group), repeat1($.section_name)),
