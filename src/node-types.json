@@ -15,6 +15,34 @@
     }
   },
   {
+    "type": "HYPHEN",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "MUSIC_CODE",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "COMMENTLINE",
+          "named": true
+        },
+        {
+          "type": "NEWLINE",
+          "named": true
+        },
+        {
+          "type": "music_content",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "Nth_ending",
     "named": true,
     "fields": {},
@@ -73,19 +101,20 @@
     }
   },
   {
-    "type": "bar",
+    "type": "abc_version",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "area",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "generic_bar_line",
-          "named": true
-        },
-        {
-          "type": "music_content",
+          "type": "TEXT",
           "named": true
         }
       ]
@@ -107,13 +136,25 @@
     }
   },
   {
-    "type": "body_inline_info",
+    "type": "body_info_line",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "COMMENTLINE",
+          "named": true
+        },
+        {
+          "type": "NEWLINE",
+          "named": true
+        },
+        {
+          "type": "instruction",
+          "named": true
+        },
         {
           "type": "key",
           "named": true
@@ -151,6 +192,10 @@
           "named": true
         },
         {
+          "type": "tune_title",
+          "named": true
+        },
+        {
           "type": "unit_note_length",
           "named": true
         },
@@ -160,6 +205,25 @@
         },
         {
           "type": "voice",
+          "named": true
+        },
+        {
+          "type": "words_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "book",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "TEXT",
           "named": true
         }
       ]
@@ -258,6 +322,21 @@
     }
   },
   {
+    "type": "composer",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "TEXT",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "decoration",
     "named": true,
     "fields": {},
@@ -267,6 +346,158 @@
       "types": [
         {
           "type": "decoration_shorthand",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "discography",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "TEXT",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "file",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "TEXT",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "file_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "COMMENTLINE",
+          "named": true
+        },
+        {
+          "type": "NEWLINE",
+          "named": true
+        },
+        {
+          "type": "file_header_info_line",
+          "named": true
+        },
+        {
+          "type": "stylesheet_directives",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "file_header_info_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "COMMENTLINE",
+          "named": true
+        },
+        {
+          "type": "NEWLINE",
+          "named": true
+        },
+        {
+          "type": "abc_version",
+          "named": true
+        },
+        {
+          "type": "area",
+          "named": true
+        },
+        {
+          "type": "book",
+          "named": true
+        },
+        {
+          "type": "composer",
+          "named": true
+        },
+        {
+          "type": "discography",
+          "named": true
+        },
+        {
+          "type": "file",
+          "named": true
+        },
+        {
+          "type": "group",
+          "named": true
+        },
+        {
+          "type": "history",
+          "named": true
+        },
+        {
+          "type": "instruction",
+          "named": true
+        },
+        {
+          "type": "macros",
+          "named": true
+        },
+        {
+          "type": "meter",
+          "named": true
+        },
+        {
+          "type": "notes",
+          "named": true
+        },
+        {
+          "type": "origin",
+          "named": true
+        },
+        {
+          "type": "remark",
+          "named": true
+        },
+        {
+          "type": "rhythm_line",
+          "named": true
+        },
+        {
+          "type": "source",
+          "named": true
+        },
+        {
+          "type": "transcription",
+          "named": true
+        },
+        {
+          "type": "unit_note_length",
+          "named": true
+        },
+        {
+          "type": "user_defined",
           "named": true
         }
       ]
@@ -350,6 +581,51 @@
     }
   },
   {
+    "type": "group",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "TEXT",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "history",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "TEXT",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "instruction",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "TEXT",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "key",
     "named": true,
     "fields": {},
@@ -384,6 +660,21 @@
     }
   },
   {
+    "type": "lyric_section",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "lyric_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "lyric_syllable",
     "named": true,
     "fields": {}
@@ -394,14 +685,30 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
+        {
+          "type": "HYPHEN",
+          "named": true
+        },
+        {
+          "type": "TILDE",
+          "named": true
+        },
+        {
+          "type": "UNDERSCORE",
+          "named": true
+        },
         {
           "type": "bar_line",
           "named": true
         },
         {
           "type": "lyric_syllable",
+          "named": true
+        },
+        {
+          "type": "note_skip",
           "named": true
         },
         {
@@ -579,6 +886,21 @@
     "fields": {}
   },
   {
+    "type": "origin",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "TEXT",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "part_line_content",
     "named": true,
     "fields": {},
@@ -636,6 +958,11 @@
     }
   },
   {
+    "type": "reference_number",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "remark",
     "named": true,
     "fields": {},
@@ -691,6 +1018,21 @@
     "fields": {}
   },
   {
+    "type": "source",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "TEXT",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -699,7 +1041,22 @@
       "required": true,
       "types": [
         {
-          "type": "body_inline_info",
+          "type": "MUSIC_CODE",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "stylesheet_directives",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "TEXTLINE",
           "named": true
         }
       ]
@@ -716,7 +1073,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "annotation",
@@ -731,6 +1088,10 @@
           "named": true
         },
         {
+          "type": "note_skip",
+          "named": true
+        },
+        {
           "type": "symbol",
           "named": true
         }
@@ -739,6 +1100,240 @@
   },
   {
     "type": "tempo",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "TEXT",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "transcription",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "TEXT",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tune",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "lyric_section",
+          "named": true
+        },
+        {
+          "type": "tune_body",
+          "named": true
+        },
+        {
+          "type": "tune_header",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tune_body",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "COMMENTLINE",
+          "named": true
+        },
+        {
+          "type": "MUSIC_CODE",
+          "named": true
+        },
+        {
+          "type": "body_info_line",
+          "named": true
+        },
+        {
+          "type": "stylesheet_directives",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tune_header",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "COMMENTLINE",
+          "named": true
+        },
+        {
+          "type": "NEWLINE",
+          "named": true
+        },
+        {
+          "type": "reference_number",
+          "named": true
+        },
+        {
+          "type": "tune_header_info_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tune_header_info_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "COMMENTLINE",
+          "named": true
+        },
+        {
+          "type": "NEWLINE",
+          "named": true
+        },
+        {
+          "type": "abc_version",
+          "named": true
+        },
+        {
+          "type": "area",
+          "named": true
+        },
+        {
+          "type": "book",
+          "named": true
+        },
+        {
+          "type": "composer",
+          "named": true
+        },
+        {
+          "type": "discography",
+          "named": true
+        },
+        {
+          "type": "file",
+          "named": true
+        },
+        {
+          "type": "group",
+          "named": true
+        },
+        {
+          "type": "history",
+          "named": true
+        },
+        {
+          "type": "instruction",
+          "named": true
+        },
+        {
+          "type": "key",
+          "named": true
+        },
+        {
+          "type": "macros",
+          "named": true
+        },
+        {
+          "type": "meter",
+          "named": true
+        },
+        {
+          "type": "notes",
+          "named": true
+        },
+        {
+          "type": "origin",
+          "named": true
+        },
+        {
+          "type": "parts_line",
+          "named": true
+        },
+        {
+          "type": "reference_number",
+          "named": true
+        },
+        {
+          "type": "remark",
+          "named": true
+        },
+        {
+          "type": "rhythm_line",
+          "named": true
+        },
+        {
+          "type": "source",
+          "named": true
+        },
+        {
+          "type": "symbol_line",
+          "named": true
+        },
+        {
+          "type": "tempo",
+          "named": true
+        },
+        {
+          "type": "transcription",
+          "named": true
+        },
+        {
+          "type": "tune_title",
+          "named": true
+        },
+        {
+          "type": "unit_note_length",
+          "named": true
+        },
+        {
+          "type": "user_defined",
+          "named": true
+        },
+        {
+          "type": "voice",
+          "named": true
+        },
+        {
+          "type": "words_postbody",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tune_title",
     "named": true,
     "fields": {},
     "children": {
@@ -797,6 +1392,25 @@
       "types": [
         {
           "type": "TEXT",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "words_line",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "NEWLINE",
+          "named": true
+        },
+        {
+          "type": "lyric_text",
           "named": true
         }
       ]
@@ -1058,7 +1672,15 @@
     "named": false
   },
   {
+    "type": "%%",
+    "named": false
+  },
+  {
     "type": "%abc-",
+    "named": false
+  },
+  {
+    "type": "+",
     "named": false
   },
   {
@@ -1071,6 +1693,10 @@
   },
   {
     "type": ".",
+    "named": false
+  },
+  {
+    "type": ":",
     "named": false
   },
   {
@@ -1158,8 +1784,16 @@
     "named": true
   },
   {
+    "type": "TILDE",
+    "named": true
+  },
+  {
     "type": "U:",
     "named": false
+  },
+  {
+    "type": "UNDERSCORE",
+    "named": true
   },
   {
     "type": "V:",
@@ -1235,6 +1869,10 @@
   },
   {
     "type": "note_letter",
+    "named": true
+  },
+  {
+    "type": "note_skip",
     "named": true
   },
   {

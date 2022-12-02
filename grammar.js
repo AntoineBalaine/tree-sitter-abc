@@ -5,7 +5,7 @@ module.exports = grammar({
   extras: $ => [$._space, $.NEWLINE],
   rules: {
     // TODO: add the actual grammar rules
-    source_file: $ => $.body_inline_info,
+    source_file: $ => $.file_structure,
 
     _space: _ => / /,
     NEWLINE: _ => /\n/,
@@ -13,15 +13,39 @@ module.exports = grammar({
 
 
 
+    SLASH: $ => seq("\\"),
+    plus: $ => seq("+"),
+    //ms_cnt_ln: $ => seq($.TEXT, $.SLASH, $.NEWLINE),
+    field_header: $ => seq(/\w/, ":"),
+    note_skip: $ => ("*"),
+    HYPHEN: $ => ("-"),
+    UNDERSCORE: $ => ("_"),
+    TILDE: $ => ("~"),
 
 
     // TYPES OF LINES
+    //info_field: $ => seq($.field_header, $.TEXTLINE, repeat(seq($.plus, $.TEXTLINE))),
     COMMENTLINE: $ => seq(/%[^%]/, $.TEXTLINE),
     stylesheet_directives: $ => seq("%%", $.TEXTLINE),
-    MUSIC_CODE: $ => seq(repeat1(choice($.bar, $.music_content)), optional(choice("\\", "$")), choice($.COMMENTLINE, $.NEWLINE)),
+    MUSIC_CODE: $ => seq(
+      repeat1(
+        choice($.bar, $.music_content)),
+      optional(choice("\\", "$")),
+      /* choice($.COMMENTLINE, $.NEWLINE) */),
 
     // FILE STRUCTURE
-    tune_body: $ => seq(repeat(choice($.MUSIC_CODE, $.body_info_line, $.COMMENTLINE, $.stylesheet_directives))),
+    file_structure: $ => seq(
+      optional($.file_header), $.tune, repeat(seq($.NEWLINE, $.tune))
+    ),
+    file_header: $ => seq(repeat1(choice($.file_header_info_line, $.stylesheet_directives, $.COMMENTLINE)), $.NEWLINE),
+    tune: $ => seq($.tune_header, optional($.tune_body), optional($.lyric_section)),
+    tune_header: $ => seq($.reference_number, choice($.NEWLINE, $.COMMENTLINE), repeat(choice($.tune_header_info_line, $.COMMENTLINE))),
+    tune_body: $ => repeat1(
+      choice(
+        $.MUSIC_CODE,
+        $.body_info_line,
+        $.COMMENTLINE,
+        $.stylesheet_directives)),
 
     // BODY
     music_content: $ => choice(
@@ -34,6 +58,75 @@ module.exports = grammar({
       $.multimeasure_rest,
       $.Nth_ending
     ),
+    body_info_line: $ => seq(choice(
+      $.instruction,
+      $.key,
+      $.macros,
+      $.meter,
+      $.notes,
+      $.parts_line,
+      $.remark,
+      $.rhythm_line,
+      $.symbol_line,
+      $.tempo,
+      $.tune_title,
+      $.unit_note_length,
+      $.user_defined,
+      $.voice,
+      $.words_line
+    ), choice($.NEWLINE, $.COMMENTLINE)),
+
+    tune_header_info_line: $ => seq(choice(
+      $.abc_version,
+      $.area,
+      $.book,
+      $.composer,
+      $.discography,
+      $.file,
+      $.group,
+      $.history,
+      $.instruction,
+      $.key,
+      $.macros,
+      $.meter,
+      $.notes,
+      $.origin,
+      $.parts_line,
+      $.reference_number,
+      $.remark,
+      $.rhythm_line,
+      $.source,
+      $.symbol_line,
+      $.tempo,
+      $.transcription,
+      $.tune_title,
+      $.unit_note_length,
+      $.user_defined,
+      $.voice,
+      $.words_postbody
+    ), choice($.NEWLINE, $.COMMENTLINE)),
+
+    file_header_info_line: $ => seq(choice(
+      $.abc_version,
+      $.area,
+      $.book,
+      $.composer,
+      $.discography,
+      $.file,
+      $.group,
+      $.history,
+      $.instruction,
+      $.macros,
+      $.meter,
+      $.notes,
+      $.origin,
+      $.remark,
+      $.rhythm_line,
+      $.source,
+      $.transcription,
+      $.unit_note_length,
+      $.user_defined
+    ), choice($.NEWLINE, $.COMMENTLINE)),
 
     //NOTES
     //the note prefixes can't be included as a rule, since they will match an empty string
@@ -57,7 +150,7 @@ module.exports = grammar({
     multimeasure_rest: $ => seq(choice("Z", "X"), token.immediate(/[0-9]+/)),
     rhythm: $ => token.immediate(/[1-9]*\/[1-9]+|[<>]+|[1-9]+|[\/]+/),
 
-    //note prefixes
+    // NOTE PREFIXES
     // shouldn't the chord-symbols go before the grace notes?
     // note_prefixes: $ => seq(repeat($.grace_note), optional($.chord_symbol), optional($.annotation), optional($.tuplet_marker), optional($.decoration)),
     grace_note: $ => seq(/\{(\/)?/, repeat1($.pitch), /\}/),
@@ -70,7 +163,6 @@ module.exports = grammar({
     decoration_shorthand: $ => /[\.~HLMOPSTuv]/,
 
     //BAR LINES
-
     bar: $ => seq(repeat($.music_content), $.generic_bar_line),
     Nth_ending: $ => seq($.nth_ending_number, $.music_content,
       choice($.bar_line, $.thin_double_bar_line
@@ -99,8 +191,8 @@ module.exports = grammar({
     lyric_syllable: $ => seq(/\w+/),
     verse_number: $ => seq(/\d/, "."),
     lyric_text: $ => choice($.verse_number, $.lyric_syllable,
-      $.bar_line, /-/, /_/,
-      /\~/, /\*/),
+      $.bar_line, $.HYPHEN, $.UNDERSCORE,
+      $.TILDE, $.note_skip),
 
     //SYMBOLS
     symbol: $ => seq("!trill!", "!trill(!", "!trill)!", "!lowermordent!", "!uppermordent!", "!mordent!", "!pralltriller!", "!roll!", "!turn!", "!turnx!", "!invertedturn!", "!invertedturnx!", "!arpeggio!", "!>!", "!accent!", "!emphasis!", "!fermata!", "!invertedfermata!", "!tenuto!", "!0! - !5!", "!+!", "!plus!", "!snap!", "!slide!", "!wedge!", "!upbow!", "!downbow!", "!open!", "!thumb!", "!breath!", "!pppp!", "!ppp!", "!pp!", "!p!", "!mp!", "!mf!", "!f!", "!ff!", "!fff!", "!ffff!", "!sfz!", "!crescendo(!", "!<(!", "!crescendo)!", "!<)!", "!diminuendo(!", "!>(!", "!diminuendo)!", "!>)!", "!segno!", "!coda!", "!D.S.!", "!D.C.!", "!dacoda!", "!dacapo!", "!fine!", "!shortphrase!", "!mediumphrase!", "!longphrase!"),
@@ -115,7 +207,7 @@ module.exports = grammar({
 
 
     body_inline_info: $ => seq("[", choice(
-      //   $.instruction,
+      $.instruction,
       $.key,
       $.macros,
       $.meter,
@@ -151,7 +243,7 @@ module.exports = grammar({
     remark: $ => seq("r:", $.TEXT),
     rhythm_line: $ => seq("R:", $.TEXT),
     source: $ => seq("S:", $.TEXT),
-    symbol_line: $ => seq("s:", repeat1(choice($.symbol, $.chord_symbol, $.annotation, $.generic_bar_line, /\*/))),
+    symbol_line: $ => seq("s:", repeat1(choice($.symbol, $.chord_symbol, $.annotation, $.generic_bar_line, $.note_skip))),
     tempo: $ => seq("Q:", $.TEXT),
     transcription: $ => seq("Z:", $.TEXT),
     tune_title: $ => seq("T:", $.TEXT),
