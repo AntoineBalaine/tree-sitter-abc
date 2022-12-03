@@ -74,17 +74,8 @@
       "value": "~"
     },
     "COMMENTLINE": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "%[^%]"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXTLINE"
-        }
-      ]
+      "type": "PATTERN",
+      "value": "%[^%\\n]*"
     },
     "stylesheet_directives": {
       "type": "SEQ",
@@ -430,11 +421,111 @@
           "members": [
             {
               "type": "SYMBOL",
+              "name": "abc_version"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "area"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "book"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "composer"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "discography"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "file"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "group"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "history"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "instruction"
+            },
+            {
+              "type": "SYMBOL",
               "name": "key"
             },
             {
               "type": "SYMBOL",
+              "name": "macros"
+            },
+            {
+              "type": "SYMBOL",
               "name": "meter"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "notes"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "origin"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "parts_line"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "reference_number"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "remark"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "rhythm_line"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "source"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "symbol_line"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "tempo"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "transcription"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "tune_title"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "unit_note_length"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "user_defined"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "voice"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "words_postbody"
             }
           ]
         },
@@ -1594,17 +1685,8 @@
       ]
     },
     "parts_line": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "P:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "part_line_content"
-        }
-      ]
+      "type": "STRING",
+      "value": "P:"
     },
     "section_name": {
       "type": "SEQ",
@@ -1748,155 +1830,56 @@
       ]
     },
     "area": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "A:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "A:"
     },
     "book": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "B:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "B:"
     },
     "composer": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "C:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "C:"
     },
     "discography": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "D:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "D:"
     },
     "file": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "F:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "F:"
     },
     "group": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "G:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "G:"
     },
     "history": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "H:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "H:"
     },
     "instruction": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "I:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "I:"
     },
     "key": {
       "type": "STRING",
       "value": "K:"
     },
     "macros": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "m:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "m:"
     },
     "meter": {
       "type": "STRING",
       "value": "M:"
     },
     "notes": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "N:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "N:"
     },
     "origin": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "O:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "O:"
     },
     "reference_number": {
       "type": "SEQ",
@@ -1912,43 +1895,16 @@
       ]
     },
     "remark": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "r:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "r:"
     },
     "rhythm_line": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "R:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "R:"
     },
     "source": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "S:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "S:"
     },
     "symbol_line": {
       "type": "SEQ",
@@ -1988,56 +1944,20 @@
       ]
     },
     "tempo": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "Q:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "Q:"
     },
     "transcription": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "Z:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "Z:"
     },
     "tune_title": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "T:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "T:"
     },
     "unit_note_length": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "L:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "L:"
     },
     "user_defined": {
       "type": "SEQ",
@@ -2070,17 +1990,8 @@
       ]
     },
     "voice": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "V:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "V:"
     },
     "words_line": {
       "type": "SEQ",
@@ -2122,17 +2033,8 @@
       ]
     },
     "words_postbody": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "W:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "W:"
     }
   },
   "extras": [
