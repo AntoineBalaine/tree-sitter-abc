@@ -20,9 +20,9 @@
 #define ALIAS_COUNT 0
 #define TOKEN_COUNT 142
 #define EXTERNAL_TOKEN_COUNT 0
-#define FIELD_COUNT 0
+#define FIELD_COUNT 1
 #define MAX_ALIAS_SEQUENCE_LENGTH 59
-#define PRODUCTION_ID_COUNT 1
+#define PRODUCTION_ID_COUNT 2
 
 enum {
   sym__space = 1,
@@ -1426,6 +1426,24 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = false,
   },
+};
+
+enum {
+  field_type = 1,
+};
+
+static const char * const ts_field_names[] = {
+  [0] = NULL,
+  [field_type] = "type",
+};
+
+static const TSFieldMapSlice ts_field_map_slices[PRODUCTION_ID_COUNT] = {
+  [1] = {.index = 0, .length = 1},
+};
+
+static const TSFieldMapEntry ts_field_map_entries[] = {
+  [0] =
+    {field_type, 0},
 };
 
 static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE_LENGTH] = {
@@ -12351,8 +12369,8 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [284] = {.entry = {.count = 2, .reusable = false}}, REDUCE(aux_sym_beam_repeat1, 2), SHIFT_REPEAT(183),
   [287] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_beam, 2),
   [289] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_beam, 2),
-  [291] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_tune_header_info_line, 2),
-  [293] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_tune_header_info_line, 2),
+  [291] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_tune_header_info_line, 2, .production_id = 1),
+  [293] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_tune_header_info_line, 2, .production_id = 1),
   [295] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_reference_number, 2),
   [297] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_reference_number, 2),
   [299] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym__pitch, 1),
@@ -12438,8 +12456,8 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [463] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_TEXTLINE, 2),
   [465] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_stylesheet_directives, 2),
   [467] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_stylesheet_directives, 2),
-  [469] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_body_info_line, 3),
-  [471] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_body_info_line, 3),
+  [469] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_body_info_line, 3, .production_id = 1),
+  [471] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_body_info_line, 3, .production_id = 1),
   [473] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym__MUSIC_CODE, 2),
   [475] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym__MUSIC_CODE, 2),
   [477] = {.entry = {.count = 1, .reusable = false}}, SHIFT(64),
@@ -12807,6 +12825,9 @@ extern const TSLanguage *tree_sitter_ABC(void) {
     .small_parse_table_map = ts_small_parse_table_map,
     .parse_actions = ts_parse_actions,
     .symbol_names = ts_symbol_names,
+    .field_names = ts_field_names,
+    .field_map_slices = ts_field_map_slices,
+    .field_map_entries = ts_field_map_entries,
     .symbol_metadata = ts_symbol_metadata,
     .public_symbol_map = ts_symbol_map,
     .alias_map = ts_non_terminal_alias_map,

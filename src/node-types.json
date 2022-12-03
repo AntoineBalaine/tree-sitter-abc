@@ -221,73 +221,80 @@
   {
     "type": "body_info_line",
     "named": true,
-    "fields": {},
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "instruction",
+            "named": true
+          },
+          {
+            "type": "key",
+            "named": true
+          },
+          {
+            "type": "macros",
+            "named": true
+          },
+          {
+            "type": "meter",
+            "named": true
+          },
+          {
+            "type": "notes",
+            "named": true
+          },
+          {
+            "type": "parts_line",
+            "named": true
+          },
+          {
+            "type": "remark",
+            "named": true
+          },
+          {
+            "type": "rhythm_line",
+            "named": true
+          },
+          {
+            "type": "symbol_line",
+            "named": true
+          },
+          {
+            "type": "tempo",
+            "named": true
+          },
+          {
+            "type": "tune_title",
+            "named": true
+          },
+          {
+            "type": "unit_note_length",
+            "named": true
+          },
+          {
+            "type": "user_defined",
+            "named": true
+          },
+          {
+            "type": "voice",
+            "named": true
+          },
+          {
+            "type": "words_line",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
         {
           "type": "COMMENTLINE",
-          "named": true
-        },
-        {
-          "type": "instruction",
-          "named": true
-        },
-        {
-          "type": "key",
-          "named": true
-        },
-        {
-          "type": "macros",
-          "named": true
-        },
-        {
-          "type": "meter",
-          "named": true
-        },
-        {
-          "type": "notes",
-          "named": true
-        },
-        {
-          "type": "parts_line",
-          "named": true
-        },
-        {
-          "type": "remark",
-          "named": true
-        },
-        {
-          "type": "rhythm_line",
-          "named": true
-        },
-        {
-          "type": "symbol_line",
-          "named": true
-        },
-        {
-          "type": "tempo",
-          "named": true
-        },
-        {
-          "type": "tune_title",
-          "named": true
-        },
-        {
-          "type": "unit_note_length",
-          "named": true
-        },
-        {
-          "type": "user_defined",
-          "named": true
-        },
-        {
-          "type": "voice",
-          "named": true
-        },
-        {
-          "type": "words_line",
           "named": true
         }
       ]
@@ -395,89 +402,96 @@
   {
     "type": "file_header_info_line",
     "named": true,
-    "fields": {},
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "abc_version",
+            "named": true
+          },
+          {
+            "type": "area",
+            "named": true
+          },
+          {
+            "type": "book",
+            "named": true
+          },
+          {
+            "type": "composer",
+            "named": true
+          },
+          {
+            "type": "discography",
+            "named": true
+          },
+          {
+            "type": "file",
+            "named": true
+          },
+          {
+            "type": "group",
+            "named": true
+          },
+          {
+            "type": "history",
+            "named": true
+          },
+          {
+            "type": "instruction",
+            "named": true
+          },
+          {
+            "type": "macros",
+            "named": true
+          },
+          {
+            "type": "meter",
+            "named": true
+          },
+          {
+            "type": "notes",
+            "named": true
+          },
+          {
+            "type": "origin",
+            "named": true
+          },
+          {
+            "type": "remark",
+            "named": true
+          },
+          {
+            "type": "rhythm_line",
+            "named": true
+          },
+          {
+            "type": "source",
+            "named": true
+          },
+          {
+            "type": "transcription",
+            "named": true
+          },
+          {
+            "type": "unit_note_length",
+            "named": true
+          },
+          {
+            "type": "user_defined",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
         {
           "type": "COMMENTLINE",
-          "named": true
-        },
-        {
-          "type": "abc_version",
-          "named": true
-        },
-        {
-          "type": "area",
-          "named": true
-        },
-        {
-          "type": "book",
-          "named": true
-        },
-        {
-          "type": "composer",
-          "named": true
-        },
-        {
-          "type": "discography",
-          "named": true
-        },
-        {
-          "type": "file",
-          "named": true
-        },
-        {
-          "type": "group",
-          "named": true
-        },
-        {
-          "type": "history",
-          "named": true
-        },
-        {
-          "type": "instruction",
-          "named": true
-        },
-        {
-          "type": "macros",
-          "named": true
-        },
-        {
-          "type": "meter",
-          "named": true
-        },
-        {
-          "type": "notes",
-          "named": true
-        },
-        {
-          "type": "origin",
-          "named": true
-        },
-        {
-          "type": "remark",
-          "named": true
-        },
-        {
-          "type": "rhythm_line",
-          "named": true
-        },
-        {
-          "type": "source",
-          "named": true
-        },
-        {
-          "type": "transcription",
-          "named": true
-        },
-        {
-          "type": "unit_note_length",
-          "named": true
-        },
-        {
-          "type": "user_defined",
           "named": true
         }
       ]
@@ -907,120 +921,121 @@
   {
     "type": "tune_header_info_line",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "abc_version",
-          "named": true
-        },
-        {
-          "type": "area",
-          "named": true
-        },
-        {
-          "type": "book",
-          "named": true
-        },
-        {
-          "type": "composer",
-          "named": true
-        },
-        {
-          "type": "discography",
-          "named": true
-        },
-        {
-          "type": "file",
-          "named": true
-        },
-        {
-          "type": "group",
-          "named": true
-        },
-        {
-          "type": "history",
-          "named": true
-        },
-        {
-          "type": "instruction",
-          "named": true
-        },
-        {
-          "type": "key",
-          "named": true
-        },
-        {
-          "type": "macros",
-          "named": true
-        },
-        {
-          "type": "meter",
-          "named": true
-        },
-        {
-          "type": "notes",
-          "named": true
-        },
-        {
-          "type": "origin",
-          "named": true
-        },
-        {
-          "type": "parts_line",
-          "named": true
-        },
-        {
-          "type": "reference_number",
-          "named": true
-        },
-        {
-          "type": "remark",
-          "named": true
-        },
-        {
-          "type": "rhythm_line",
-          "named": true
-        },
-        {
-          "type": "source",
-          "named": true
-        },
-        {
-          "type": "symbol_line",
-          "named": true
-        },
-        {
-          "type": "tempo",
-          "named": true
-        },
-        {
-          "type": "transcription",
-          "named": true
-        },
-        {
-          "type": "tune_title",
-          "named": true
-        },
-        {
-          "type": "unit_note_length",
-          "named": true
-        },
-        {
-          "type": "user_defined",
-          "named": true
-        },
-        {
-          "type": "voice",
-          "named": true
-        },
-        {
-          "type": "words_postbody",
-          "named": true
-        }
-      ]
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "abc_version",
+            "named": true
+          },
+          {
+            "type": "area",
+            "named": true
+          },
+          {
+            "type": "book",
+            "named": true
+          },
+          {
+            "type": "composer",
+            "named": true
+          },
+          {
+            "type": "discography",
+            "named": true
+          },
+          {
+            "type": "file",
+            "named": true
+          },
+          {
+            "type": "group",
+            "named": true
+          },
+          {
+            "type": "history",
+            "named": true
+          },
+          {
+            "type": "instruction",
+            "named": true
+          },
+          {
+            "type": "key",
+            "named": true
+          },
+          {
+            "type": "macros",
+            "named": true
+          },
+          {
+            "type": "meter",
+            "named": true
+          },
+          {
+            "type": "notes",
+            "named": true
+          },
+          {
+            "type": "origin",
+            "named": true
+          },
+          {
+            "type": "parts_line",
+            "named": true
+          },
+          {
+            "type": "reference_number",
+            "named": true
+          },
+          {
+            "type": "remark",
+            "named": true
+          },
+          {
+            "type": "rhythm_line",
+            "named": true
+          },
+          {
+            "type": "source",
+            "named": true
+          },
+          {
+            "type": "symbol_line",
+            "named": true
+          },
+          {
+            "type": "tempo",
+            "named": true
+          },
+          {
+            "type": "transcription",
+            "named": true
+          },
+          {
+            "type": "tune_title",
+            "named": true
+          },
+          {
+            "type": "unit_note_length",
+            "named": true
+          },
+          {
+            "type": "user_defined",
+            "named": true
+          },
+          {
+            "type": "voice",
+            "named": true
+          },
+          {
+            "type": "words_postbody",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {

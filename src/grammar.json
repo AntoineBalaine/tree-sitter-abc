@@ -333,64 +333,124 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "instruction"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "instruction"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "key"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "key"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "macros"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "macros"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "meter"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "meter"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "notes"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "notes"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "parts_line"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "parts_line"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "remark"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "remark"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "rhythm_line"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "rhythm_line"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "symbol_line"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "symbol_line"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "tempo"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "tempo"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "tune_title"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "tune_title"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "unit_note_length"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "unit_note_length"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "user_defined"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "user_defined"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "voice"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "voice"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "words_line"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "words_line"
+              }
             }
           ]
         },
@@ -420,112 +480,220 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "abc_version"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "abc_version"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "area"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "area"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "book"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "book"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "composer"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "composer"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "discography"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "discography"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "file"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "file"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "group"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "group"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "history"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "history"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "instruction"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "instruction"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "key"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "key"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "macros"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "macros"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "meter"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "meter"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "notes"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "notes"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "origin"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "origin"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "parts_line"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "parts_line"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "reference_number"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "reference_number"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "remark"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "remark"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "rhythm_line"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "rhythm_line"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "source"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "source"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "symbol_line"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "symbol_line"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "tempo"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "tempo"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "transcription"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "transcription"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "tune_title"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "tune_title"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "unit_note_length"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "unit_note_length"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "user_defined"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "user_defined"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "voice"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "voice"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "words_postbody"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "words_postbody"
+              }
             }
           ]
         },
@@ -542,80 +710,156 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "abc_version"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "abc_version"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "area"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "area"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "book"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "book"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "composer"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "composer"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "discography"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "discography"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "file"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "file"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "group"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "group"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "history"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "history"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "instruction"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "instruction"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "macros"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "macros"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "meter"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "meter"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "notes"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "notes"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "origin"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "origin"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "remark"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "remark"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "rhythm_line"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "rhythm_line"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "source"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "source"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "transcription"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "transcription"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "unit_note_length"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "unit_note_length"
+              }
             },
             {
-              "type": "SYMBOL",
-              "name": "user_defined"
+              "type": "FIELD",
+              "name": "type",
+              "content": {
+                "type": "SYMBOL",
+                "name": "user_defined"
+              }
             }
           ]
         },
