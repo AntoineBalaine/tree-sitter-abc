@@ -1,6 +1,6 @@
 X:1
 %abc-2.2
-A:LosANGELES %hello
+A:LosANGELES 
 B:book of start
 D:NOT YET
 F:THIS FILE
@@ -9,4 +9,4 @@ H: NO RECORD, thank you
 I:-----
 M:C
 K:C
-abc | bca | cba
+abc | bca | "annotation" ^c,b/2a/// | [ceg]

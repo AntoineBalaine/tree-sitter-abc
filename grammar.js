@@ -1,5 +1,5 @@
 module.exports = grammar({
-  name: 'ABC',
+  name: 'abc',
 
   conflicts: $ => [[$._MUSIC_CODE, $.bar],
   [$._MUSIC_CODE],
