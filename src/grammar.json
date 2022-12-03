@@ -3,13 +3,13 @@
   "rules": {
     "source_file": {
       "type": "SYMBOL",
-      "name": "file_structure"
+      "name": "tune"
     },
     "_space": {
       "type": "PATTERN",
       "value": " "
     },
-    "NEWLINE": {
+    "_NEWLINE": {
       "type": "PATTERN",
       "value": "\\n"
     },
@@ -22,7 +22,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "NEWLINE"
+          "name": "_NEWLINE"
         }
       ]
     },
@@ -99,7 +99,7 @@
         }
       ]
     },
-    "MUSIC_CODE": {
+    "_MUSIC_CODE": {
       "type": "SEQ",
       "members": [
         {
@@ -113,7 +113,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "music_content"
+                "name": "_music_content"
               }
             ]
           }
@@ -167,7 +167,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "NEWLINE"
+                "name": "_NEWLINE"
               },
               {
                 "type": "SYMBOL",
@@ -203,7 +203,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "NEWLINE"
+          "name": "_NEWLINE"
         }
       ]
     },
@@ -266,30 +266,39 @@
       ]
     },
     "tune_body": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "CHOICE",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "MUSIC_CODE"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "body_info_line"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "COMMENTLINE"
-          },
-          {
-            "type": "SYMBOL",
-            "name": "stylesheet_directives"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_MUSIC_CODE"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_MUSIC_CODE"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "body_info_line"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "COMMENTLINE"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "stylesheet_directives"
+              }
+            ]
           }
-        ]
-      }
+        }
+      ]
     },
-    "music_content": {
+    "_music_content": {
       "type": "CHOICE",
       "members": [
         {
@@ -302,7 +311,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "nte_or_chrd"
+          "name": "_nte_or_chrd"
         },
         {
           "type": "SYMBOL",
@@ -395,11 +404,15 @@
           ]
         },
         {
+          "type": "PATTERN",
+          "value": ".*"
+        },
+        {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "NEWLINE"
+              "name": "_NEWLINE"
             },
             {
               "type": "SYMBOL",
@@ -417,126 +430,17 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "abc_version"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "area"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "book"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "composer"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "discography"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "file"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "group"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "history"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "instruction"
-            },
-            {
-              "type": "SYMBOL",
               "name": "key"
             },
             {
               "type": "SYMBOL",
-              "name": "macros"
-            },
-            {
-              "type": "SYMBOL",
               "name": "meter"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "notes"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "origin"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "parts_line"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "reference_number"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "remark"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "rhythm_line"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "source"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "symbol_line"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "tempo"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "transcription"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "tune_title"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "unit_note_length"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "user_defined"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "voice"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "words_postbody"
             }
           ]
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "NEWLINE"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "COMMENTLINE"
-            }
-          ]
+          "type": "PATTERN",
+          "value": ".*"
         }
       ]
     },
@@ -625,11 +529,15 @@
           ]
         },
         {
+          "type": "PATTERN",
+          "value": ".*"
+        },
+        {
           "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "NEWLINE"
+              "name": "_NEWLINE"
             },
             {
               "type": "SYMBOL",
@@ -639,16 +547,16 @@
         }
       ]
     },
-    "nte_or_chrd": {
+    "_nte_or_chrd": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "note_construct"
+          "name": "_note_construct"
         },
         {
           "type": "SYMBOL",
-          "name": "chord_cstrct"
+          "name": "_chord_cstrct"
         }
       ]
     },
@@ -660,7 +568,7 @@
         "members": [
           {
             "type": "SYMBOL",
-            "name": "nte_or_chrd"
+            "name": "_nte_or_chrd"
           },
           {
             "type": "CHOICE",
@@ -669,7 +577,7 @@
                 "type": "REPEAT1",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "nte_or_chrd"
+                  "name": "_nte_or_chrd"
                 }
               },
               {
@@ -683,7 +591,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "nte_or_chrd"
+                      "name": "_nte_or_chrd"
                     }
                   ]
                 }
@@ -701,7 +609,7 @@
       "type": "STRING",
       "value": ")"
     },
-    "note_construct": {
+    "_note_construct": {
       "type": "SEQ",
       "members": [
         {
@@ -758,7 +666,7 @@
         }
       ]
     },
-    "chord_cstrct": {
+    "_chord_cstrct": {
       "type": "SEQ",
       "members": [
         {
@@ -834,7 +742,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "pitch"
+              "name": "_pitch"
             },
             {
               "type": "SYMBOL",
@@ -884,7 +792,7 @@
         }
       ]
     },
-    "pitch": {
+    "_pitch": {
       "type": "SEQ",
       "members": [
         {
@@ -977,7 +885,7 @@
           "type": "REPEAT1",
           "content": {
             "type": "SYMBOL",
-            "name": "pitch"
+            "name": "_pitch"
           }
         },
         {
@@ -1120,7 +1028,7 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "music_content"
+            "name": "_music_content"
           }
         },
         {
@@ -1138,7 +1046,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "music_content"
+          "name": "_music_content"
         },
         {
           "type": "CHOICE",
@@ -1359,7 +1267,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "NEWLINE"
+          "name": "_NEWLINE"
         }
       ]
     },
@@ -1797,6 +1705,10 @@
           ]
         },
         {
+          "type": "PATTERN",
+          "value": "[^\\]]*"
+        },
+        {
           "type": "STRING",
           "value": "]"
         }
@@ -1940,17 +1852,8 @@
       ]
     },
     "key": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "K:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "K:"
     },
     "macros": {
       "type": "SEQ",
@@ -1966,17 +1869,8 @@
       ]
     },
     "meter": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "M:"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "TEXT"
-        }
-      ]
+      "type": "STRING",
+      "value": "M:"
     },
     "notes": {
       "type": "SEQ",
@@ -2204,7 +2098,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "NEWLINE"
+          "name": "_NEWLINE"
         },
         {
           "type": "REPEAT",
@@ -2248,16 +2142,16 @@
     },
     {
       "type": "SYMBOL",
-      "name": "NEWLINE"
+      "name": "_NEWLINE"
     }
   ],
   "conflicts": [
     [
-      "MUSIC_CODE",
+      "_MUSIC_CODE",
       "bar"
     ],
     [
-      "MUSIC_CODE"
+      "_MUSIC_CODE"
     ],
     [
       "tune_header"

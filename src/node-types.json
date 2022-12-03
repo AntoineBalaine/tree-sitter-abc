@@ -20,25 +20,6 @@
     "fields": {}
   },
   {
-    "type": "MUSIC_CODE",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "bar",
-          "named": true
-        },
-        {
-          "type": "music_content",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "Nth_ending",
     "named": true,
     "fields": {},
@@ -47,7 +28,27 @@
       "required": true,
       "types": [
         {
+          "type": "Nth_ending",
+          "named": true
+        },
+        {
+          "type": "annotation",
+          "named": true
+        },
+        {
           "type": "bar_line",
+          "named": true
+        },
+        {
+          "type": "beam",
+          "named": true
+        },
+        {
+          "type": "chord_note",
+          "named": true
+        },
+        {
+          "type": "chord_symbol",
           "named": true
         },
         {
@@ -55,11 +56,23 @@
           "named": true
         },
         {
+          "type": "decoration",
+          "named": true
+        },
+        {
           "type": "end_of_repeated_section",
           "named": true
         },
         {
-          "type": "music_content",
+          "type": "grace_note",
+          "named": true
+        },
+        {
+          "type": "multimeasure_rest",
+          "named": true
+        },
+        {
+          "type": "note",
           "named": true
         },
         {
@@ -71,24 +84,41 @@
           "named": true
         },
         {
+          "type": "rhythm",
+          "named": true
+        },
+        {
+          "type": "slur_close",
+          "named": true
+        },
+        {
+          "type": "slur_open",
+          "named": true
+        },
+        {
           "type": "thin_double_bar_line",
+          "named": true
+        },
+        {
+          "type": "tuplet_marker",
           "named": true
         }
       ]
     }
   },
   {
+    "type": "TEXT",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "TEXTLINE",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "NEWLINE",
-          "named": true
-        },
         {
           "type": "TEXT",
           "named": true
@@ -125,11 +155,59 @@
       "required": true,
       "types": [
         {
+          "type": "Nth_ending",
+          "named": true
+        },
+        {
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "beam",
+          "named": true
+        },
+        {
+          "type": "chord_note",
+          "named": true
+        },
+        {
+          "type": "chord_symbol",
+          "named": true
+        },
+        {
+          "type": "decoration",
+          "named": true
+        },
+        {
           "type": "generic_bar_line",
           "named": true
         },
         {
-          "type": "music_content",
+          "type": "grace_note",
+          "named": true
+        },
+        {
+          "type": "multimeasure_rest",
+          "named": true
+        },
+        {
+          "type": "note",
+          "named": true
+        },
+        {
+          "type": "rhythm",
+          "named": true
+        },
+        {
+          "type": "slur_close",
+          "named": true
+        },
+        {
+          "type": "slur_open",
+          "named": true
+        },
+        {
+          "type": "tuplet_marker",
           "named": true
         }
       ]
@@ -144,7 +222,27 @@
       "required": true,
       "types": [
         {
-          "type": "nte_or_chrd",
+          "type": "chord_note",
+          "named": true
+        },
+        {
+          "type": "chord_symbol",
+          "named": true
+        },
+        {
+          "type": "decoration",
+          "named": true
+        },
+        {
+          "type": "grace_note",
+          "named": true
+        },
+        {
+          "type": "note",
+          "named": true
+        },
+        {
+          "type": "rhythm",
           "named": true
         }
       ]
@@ -160,10 +258,6 @@
       "types": [
         {
           "type": "COMMENTLINE",
-          "named": true
-        },
-        {
-          "type": "NEWLINE",
           "named": true
         },
         {
@@ -239,37 +333,6 @@
       "types": [
         {
           "type": "TEXT",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "chord_cstrct",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "chord_note",
-          "named": true
-        },
-        {
-          "type": "chord_symbol",
-          "named": true
-        },
-        {
-          "type": "decoration",
-          "named": true
-        },
-        {
-          "type": "grace_note",
-          "named": true
-        },
-        {
-          "type": "rhythm",
           "named": true
         }
       ]
@@ -409,10 +472,6 @@
           "named": true
         },
         {
-          "type": "NEWLINE",
-          "named": true
-        },
-        {
           "type": "file_header_info_line",
           "named": true
         },
@@ -433,10 +492,6 @@
       "types": [
         {
           "type": "COMMENTLINE",
-          "named": true
-        },
-        {
-          "type": "NEWLINE",
           "named": true
         },
         {
@@ -519,29 +574,6 @@
     }
   },
   {
-    "type": "file_structure",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "NEWLINE",
-          "named": true
-        },
-        {
-          "type": "file_header",
-          "named": true
-        },
-        {
-          "type": "tune",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "first_repeat_bar",
     "named": true,
     "fields": {},
@@ -612,7 +644,15 @@
       "required": true,
       "types": [
         {
-          "type": "pitch",
+          "type": "alteration",
+          "named": true
+        },
+        {
+          "type": "note_letter",
+          "named": true
+        },
+        {
+          "type": "octave",
           "named": true
         }
       ]
@@ -664,32 +704,13 @@
     }
   },
   {
-    "type": "key",
+    "type": "lyric_line",
     "named": true,
     "fields": {},
     "children": {
       "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "TEXT",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "lyric_line",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "NEWLINE",
-          "named": true
-        },
         {
           "type": "words_postbody",
           "named": true
@@ -772,67 +793,9 @@
     }
   },
   {
-    "type": "meter",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "TEXT",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "multimeasure_rest",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "music_content",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "Nth_ending",
-          "named": true
-        },
-        {
-          "type": "annotation",
-          "named": true
-        },
-        {
-          "type": "beam",
-          "named": true
-        },
-        {
-          "type": "multimeasure_rest",
-          "named": true
-        },
-        {
-          "type": "nte_or_chrd",
-          "named": true
-        },
-        {
-          "type": "slur_close",
-          "named": true
-        },
-        {
-          "type": "slur_open",
-          "named": true
-        },
-        {
-          "type": "tuplet_marker",
-          "named": true
-        }
-      ]
-    }
   },
   {
     "type": "note",
@@ -843,7 +806,15 @@
       "required": true,
       "types": [
         {
-          "type": "pitch",
+          "type": "alteration",
+          "named": true
+        },
+        {
+          "type": "note_letter",
+          "named": true
+        },
+        {
+          "type": "octave",
           "named": true
         },
         {
@@ -852,33 +823,6 @@
         },
         {
           "type": "rhythm",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "note_construct",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "chord_symbol",
-          "named": true
-        },
-        {
-          "type": "decoration",
-          "named": true
-        },
-        {
-          "type": "grace_note",
-          "named": true
-        },
-        {
-          "type": "note",
           "named": true
         }
       ]
@@ -894,25 +838,6 @@
       "types": [
         {
           "type": "TEXT",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "nte_or_chrd",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "chord_cstrct",
-          "named": true
-        },
-        {
-          "type": "note_construct",
           "named": true
         }
       ]
@@ -967,29 +892,6 @@
       "types": [
         {
           "type": "part_line_content",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "pitch",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "alteration",
-          "named": true
-        },
-        {
-          "type": "note_letter",
-          "named": true
-        },
-        {
-          "type": "octave",
           "named": true
         }
       ]
@@ -1079,7 +981,7 @@
       "required": true,
       "types": [
         {
-          "type": "file_structure",
+          "type": "tune",
           "named": true
         }
       ]
@@ -1195,14 +1097,26 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "COMMENTLINE",
           "named": true
         },
         {
-          "type": "MUSIC_CODE",
+          "type": "Nth_ending",
+          "named": true
+        },
+        {
+          "type": "annotation",
+          "named": true
+        },
+        {
+          "type": "bar",
+          "named": true
+        },
+        {
+          "type": "beam",
           "named": true
         },
         {
@@ -1210,7 +1124,47 @@
           "named": true
         },
         {
+          "type": "chord_note",
+          "named": true
+        },
+        {
+          "type": "chord_symbol",
+          "named": true
+        },
+        {
+          "type": "decoration",
+          "named": true
+        },
+        {
+          "type": "grace_note",
+          "named": true
+        },
+        {
+          "type": "multimeasure_rest",
+          "named": true
+        },
+        {
+          "type": "note",
+          "named": true
+        },
+        {
+          "type": "rhythm",
+          "named": true
+        },
+        {
+          "type": "slur_close",
+          "named": true
+        },
+        {
+          "type": "slur_open",
+          "named": true
+        },
+        {
           "type": "stylesheet_directives",
+          "named": true
+        },
+        {
+          "type": "tuplet_marker",
           "named": true
         }
       ]
@@ -1244,123 +1198,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "COMMENTLINE",
-          "named": true
-        },
-        {
-          "type": "NEWLINE",
-          "named": true
-        },
-        {
-          "type": "abc_version",
-          "named": true
-        },
-        {
-          "type": "area",
-          "named": true
-        },
-        {
-          "type": "book",
-          "named": true
-        },
-        {
-          "type": "composer",
-          "named": true
-        },
-        {
-          "type": "discography",
-          "named": true
-        },
-        {
-          "type": "file",
-          "named": true
-        },
-        {
-          "type": "group",
-          "named": true
-        },
-        {
-          "type": "history",
-          "named": true
-        },
-        {
-          "type": "instruction",
-          "named": true
-        },
         {
           "type": "key",
           "named": true
         },
         {
-          "type": "macros",
-          "named": true
-        },
-        {
           "type": "meter",
-          "named": true
-        },
-        {
-          "type": "notes",
-          "named": true
-        },
-        {
-          "type": "origin",
-          "named": true
-        },
-        {
-          "type": "parts_line",
-          "named": true
-        },
-        {
-          "type": "reference_number",
-          "named": true
-        },
-        {
-          "type": "remark",
-          "named": true
-        },
-        {
-          "type": "rhythm_line",
-          "named": true
-        },
-        {
-          "type": "source",
-          "named": true
-        },
-        {
-          "type": "symbol_line",
-          "named": true
-        },
-        {
-          "type": "tempo",
-          "named": true
-        },
-        {
-          "type": "transcription",
-          "named": true
-        },
-        {
-          "type": "tune_title",
-          "named": true
-        },
-        {
-          "type": "unit_note_length",
-          "named": true
-        },
-        {
-          "type": "user_defined",
-          "named": true
-        },
-        {
-          "type": "voice",
-          "named": true
-        },
-        {
-          "type": "words_postbody",
           "named": true
         }
       ]
@@ -1439,10 +1285,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "NEWLINE",
-          "named": true
-        },
         {
           "type": "lyric_text",
           "named": true
@@ -1770,24 +1612,12 @@
     "named": false
   },
   {
-    "type": "K:",
-    "named": false
-  },
-  {
     "type": "L:",
-    "named": false
-  },
-  {
-    "type": "M:",
     "named": false
   },
   {
     "type": "N:",
     "named": false
-  },
-  {
-    "type": "NEWLINE",
-    "named": true
   },
   {
     "type": "O:",
@@ -1812,10 +1642,6 @@
   {
     "type": "T:",
     "named": false
-  },
-  {
-    "type": "TEXT",
-    "named": true
   },
   {
     "type": "TILDE",
@@ -1898,8 +1724,16 @@
     "named": true
   },
   {
+    "type": "key",
+    "named": true
+  },
+  {
     "type": "m:",
     "named": false
+  },
+  {
+    "type": "meter",
+    "named": true
   },
   {
     "type": "note_letter",
