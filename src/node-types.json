@@ -28,11 +28,7 @@
       "required": true,
       "types": [
         {
-          "type": "COMMENTLINE",
-          "named": true
-        },
-        {
-          "type": "NEWLINE",
+          "type": "bar",
           "named": true
         },
         {
@@ -115,6 +111,25 @@
       "types": [
         {
           "type": "TEXT",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "bar",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "generic_bar_line",
+          "named": true
+        },
+        {
+          "type": "music_content",
           "named": true
         }
       ]
@@ -498,6 +513,29 @@
         },
         {
           "type": "user_defined",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "file_structure",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "NEWLINE",
+          "named": true
+        },
+        {
+          "type": "file_header",
+          "named": true
+        },
+        {
+          "type": "tune",
           "named": true
         }
       ]
@@ -1041,7 +1079,7 @@
       "required": true,
       "types": [
         {
-          "type": "MUSIC_CODE",
+          "type": "file_structure",
           "named": true
         }
       ]
@@ -1188,10 +1226,6 @@
       "types": [
         {
           "type": "COMMENTLINE",
-          "named": true
-        },
-        {
-          "type": "NEWLINE",
           "named": true
         },
         {

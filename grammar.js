@@ -1,7 +1,10 @@
 module.exports = grammar({
   name: 'ABC',
 
-
+  conflicts: $ => [[$.MUSIC_CODE, $.bar],
+  [$.MUSIC_CODE],
+  [$.tune_header]
+  ],
   extras: $ => [$._space, $.NEWLINE],
   rules: {
     // TODO: add the actual grammar rules
@@ -24,7 +27,7 @@ module.exports = grammar({
 
 
     // TYPES OF LINES
-    //info_field: $ => seq($.field_header, $.TEXTLINE, repeat(seq($.plus, $.TEXTLINE))),
+    // info_field: $ => seq($.field_header, $.TEXTLINE, repeat(seq($.plus, $.TEXTLINE))),
     COMMENTLINE: $ => seq(/%[^%]/, $.TEXTLINE),
     stylesheet_directives: $ => seq("%%", $.TEXTLINE),
     MUSIC_CODE: $ => seq(
@@ -39,7 +42,7 @@ module.exports = grammar({
     ),
     file_header: $ => seq(repeat1(choice($.file_header_info_line, $.stylesheet_directives, $.COMMENTLINE)), $.NEWLINE),
     tune: $ => seq($.tune_header, optional($.tune_body), optional($.lyric_section)),
-    tune_header: $ => seq($.reference_number, choice($.NEWLINE, $.COMMENTLINE), repeat(choice($.tune_header_info_line, $.COMMENTLINE))),
+    tune_header: $ => seq($.reference_number, /* choice($.NEWLINE, $.COMMENTLINE), */ repeat(choice($.tune_header_info_line, $.COMMENTLINE))),
     tune_body: $ => repeat1(
       choice(
         $.MUSIC_CODE,
