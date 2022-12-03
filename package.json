@@ -13,5 +13,15 @@
   },
   "scripts": {
     "parse-examples": "tree-sitter parse 'examples/**/*' --quiet --stat"
-  }
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.abc",
+      "file-types": [
+        "abc"
+      ],
+      "first-line-regex": "(%abc|X:[0-9])",
+      "injection-regex": "abc"
+    }
+  ]
 }
