@@ -57,7 +57,7 @@
           "named": true
         },
         {
-          "type": "note",
+          "type": "note_construct",
           "named": true
         },
         {
@@ -161,7 +161,7 @@
           "named": true
         },
         {
-          "type": "note",
+          "type": "note_construct",
           "named": true
         },
         {
@@ -208,7 +208,7 @@
           "named": true
         },
         {
-          "type": "note",
+          "type": "note_construct",
           "named": true
         },
         {
@@ -693,6 +693,33 @@
     }
   },
   {
+    "type": "note_construct",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "chord_symbol",
+          "named": true
+        },
+        {
+          "type": "decoration",
+          "named": true
+        },
+        {
+          "type": "grace_note",
+          "named": true
+        },
+        {
+          "type": "note",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "nth_ending_number",
     "named": true,
     "fields": {}
@@ -822,7 +849,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "COMMENTLINE",
@@ -869,7 +896,7 @@
           "named": true
         },
         {
-          "type": "note",
+          "type": "note_construct",
           "named": true
         },
         {
@@ -903,14 +930,6 @@
       "multiple": true,
       "required": true,
       "types": [
-        {
-          "type": "COMMENTLINE",
-          "named": true
-        },
-        {
-          "type": "reference_number",
-          "named": true
-        },
         {
           "type": "tune_header_info_line",
           "named": true
@@ -1036,6 +1055,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "COMMENTLINE",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1072,6 +1101,10 @@
         }
       ]
     }
+  },
+  {
+    "type": "\n",
+    "named": false
   },
   {
     "type": "!+!",
