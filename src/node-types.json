@@ -38,6 +38,10 @@
       "required": true,
       "types": [
         {
+          "type": "BEAM_SEPARATOR",
+          "named": true
+        },
+        {
           "type": "chord_note",
           "named": true
         },
@@ -1287,6 +1291,10 @@
     "named": false
   },
   {
+    "type": "BEAM_SEPARATOR",
+    "named": true
+  },
+  {
     "type": "COMMENTLINE",
     "named": true
   },
@@ -1324,10 +1332,6 @@
   },
   {
     "type": "]",
-    "named": false
-  },
-  {
-    "type": "`",
     "named": false
   },
   {

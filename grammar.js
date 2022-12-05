@@ -24,7 +24,7 @@ module.exports = grammar({
     HYPHEN: _ => ("-"),
     UNDERSCORE: _ => ("_"),
     TILDE: _ => ("~"),
-
+    BEAM_SEPARATOR: _ => "`",
 
     // TYPES OF LINES
     // info_field: $ => seq($.field_header, $.TEXTLINE, repeat(seq($.plus, $.TEXTLINE))),
@@ -64,7 +64,7 @@ module.exports = grammar({
     //NOTES
     //the note prefixes can't be included as a rule, since they will match an empty string
     _nte_or_chrd: $ => choice($.note_construct, $._chord_cstrct),
-    beam: $ => prec.right(2, seq($._nte_or_chrd, repeat1(seq(optional("`"), $._nte_or_chrd)), /[\s\n]/)),
+    beam: $ => prec.right(2, seq($._nte_or_chrd, repeat1(seq(optional($.BEAM_SEPARATOR), $._nte_or_chrd)), /[\s\n]/)),
 
     slur_open: _ => "(",
     slur_close: _ => ")",

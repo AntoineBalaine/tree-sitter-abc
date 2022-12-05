@@ -34,11 +34,11 @@ enum {
   anon_sym_DASH = 7,
   sym_UNDERSCORE = 8,
   sym_TILDE = 9,
-  sym_COMMENTLINE = 10,
-  anon_sym_PERCENT_PERCENT = 11,
-  aux_sym__MUSIC_CODE_token1 = 12,
-  aux_sym__music_content_token1 = 13,
-  anon_sym_BQUOTE = 14,
+  sym_BEAM_SEPARATOR = 10,
+  sym_COMMENTLINE = 11,
+  anon_sym_PERCENT_PERCENT = 12,
+  aux_sym__MUSIC_CODE_token1 = 13,
+  aux_sym__music_content_token1 = 14,
   aux_sym_beam_token1 = 15,
   sym_slur_open = 16,
   sym_slur_close = 17,
@@ -242,11 +242,11 @@ static const char * const ts_symbol_names[] = {
   [anon_sym_DASH] = "-",
   [sym_UNDERSCORE] = "UNDERSCORE",
   [sym_TILDE] = "TILDE",
+  [sym_BEAM_SEPARATOR] = "BEAM_SEPARATOR",
   [sym_COMMENTLINE] = "COMMENTLINE",
   [anon_sym_PERCENT_PERCENT] = "%%",
   [aux_sym__MUSIC_CODE_token1] = "_MUSIC_CODE_token1",
   [aux_sym__music_content_token1] = "_music_content_token1",
-  [anon_sym_BQUOTE] = "`",
   [aux_sym_beam_token1] = "beam_token1",
   [sym_slur_open] = "slur_open",
   [sym_slur_close] = "slur_close",
@@ -450,11 +450,11 @@ static const TSSymbol ts_symbol_map[] = {
   [anon_sym_DASH] = anon_sym_DASH,
   [sym_UNDERSCORE] = sym_UNDERSCORE,
   [sym_TILDE] = sym_TILDE,
+  [sym_BEAM_SEPARATOR] = sym_BEAM_SEPARATOR,
   [sym_COMMENTLINE] = sym_COMMENTLINE,
   [anon_sym_PERCENT_PERCENT] = anon_sym_PERCENT_PERCENT,
   [aux_sym__MUSIC_CODE_token1] = aux_sym__MUSIC_CODE_token1,
   [aux_sym__music_content_token1] = aux_sym__music_content_token1,
-  [anon_sym_BQUOTE] = anon_sym_BQUOTE,
   [aux_sym_beam_token1] = aux_sym_beam_token1,
   [sym_slur_open] = sym_slur_open,
   [sym_slur_close] = sym_slur_close,
@@ -688,6 +688,10 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = true,
   },
+  [sym_BEAM_SEPARATOR] = {
+    .visible = true,
+    .named = true,
+  },
   [sym_COMMENTLINE] = {
     .visible = true,
     .named = true,
@@ -702,10 +706,6 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
   },
   [aux_sym__music_content_token1] = {
     .visible = false,
-    .named = false,
-  },
-  [anon_sym_BQUOTE] = {
-    .visible = true,
     .named = false,
   },
   [aux_sym_beam_token1] = {
@@ -1837,7 +1837,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == ' ') ADVANCE(294);
       if (lookahead == '!') ADVANCE(74);
       if (lookahead == '"') ADVANCE(354);
-      if (lookahead == '%') ADVANCE(310);
+      if (lookahead == '%') ADVANCE(311);
       if (lookahead == '\'') ADVANCE(337);
       if (lookahead == '(') ADVANCE(321);
       if (lookahead == ')') ADVANCE(322);
@@ -1878,7 +1878,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == ']') ADVANCE(326);
       if (lookahead == '^') ADVANCE(328);
       if (lookahead == '_') ADVANCE(305);
-      if (lookahead == '`') ADVANCE(319);
+      if (lookahead == '`') ADVANCE(310);
       if (lookahead == 'm') ADVANCE(578);
       if (lookahead == 'r') ADVANCE(579);
       if (lookahead == 's') ADVANCE(580);
@@ -1891,7 +1891,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == 119082 ||
           lookahead == 119083) ADVANCE(327);
       if (lookahead == '\t' ||
-          lookahead == '\r') ADVANCE(317);
+          lookahead == '\r') ADVANCE(318);
       if (('<' <= lookahead && lookahead <= '>')) ADVANCE(348);
       if (lookahead == 'x' ||
           lookahead == 'z') ADVANCE(338);
@@ -1904,7 +1904,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       END_STATE();
     case 1:
       if (lookahead == '\n') ADVANCE(295);
-      if (lookahead == '%') ADVANCE(315);
+      if (lookahead == '%') ADVANCE(316);
       if (lookahead == '*') ADVANCE(301);
       if (lookahead == '-') ADVANCE(303);
       if (lookahead == '.') ADVANCE(428);
@@ -1945,7 +1945,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 5:
       if (lookahead == '!') ADVANCE(74);
       if (lookahead == '"') ADVANCE(354);
-      if (lookahead == '%') ADVANCE(311);
+      if (lookahead == '%') ADVANCE(312);
       if (lookahead == '(') ADVANCE(321);
       if (lookahead == ')') ADVANCE(322);
       if (lookahead == ',') ADVANCE(406);
@@ -1982,7 +1982,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
-          lookahead == ' ') ADVANCE(317);
+          lookahead == ' ') ADVANCE(318);
       if (lookahead == '.' ||
           lookahead == 'H' ||
           ('O' <= lookahead && lookahead <= 'S') ||
@@ -1995,7 +1995,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
     case 6:
       if (lookahead == '!') ADVANCE(74);
       if (lookahead == '"') ADVANCE(354);
-      if (lookahead == '%') ADVANCE(311);
+      if (lookahead == '%') ADVANCE(312);
       if (lookahead == '(') ADVANCE(321);
       if (lookahead == ')') ADVANCE(322);
       if (lookahead == ':') ADVANCE(82);
@@ -2030,7 +2030,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
-          lookahead == ' ') ADVANCE(318);
+          lookahead == ' ') ADVANCE(319);
       if (lookahead == '.' ||
           lookahead == 'H' ||
           ('O' <= lookahead && lookahead <= 'S') ||
@@ -2258,7 +2258,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == ']') ADVANCE(326);
       if (lookahead == '^') ADVANCE(328);
       if (lookahead == '_') ADVANCE(329);
-      if (lookahead == '`') ADVANCE(319);
+      if (lookahead == '`') ADVANCE(310);
       if (lookahead == '{') ADVANCE(351);
       if (lookahead == '}') ADVANCE(352);
       if (lookahead == '\'' ||
@@ -2269,7 +2269,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
-          lookahead == ' ') ADVANCE(317);
+          lookahead == ' ') ADVANCE(318);
       if (('1' <= lookahead && lookahead <= '9')) ADVANCE(347);
       if (lookahead == '.' ||
           lookahead == 'H' ||
@@ -2297,7 +2297,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '[') ADVANCE(324);
       if (lookahead == '^') ADVANCE(328);
       if (lookahead == '_') ADVANCE(329);
-      if (lookahead == '`') ADVANCE(319);
+      if (lookahead == '`') ADVANCE(310);
       if (lookahead == '{') ADVANCE(351);
       if (lookahead == '\'' ||
           lookahead == ',') ADVANCE(337);
@@ -3026,7 +3026,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\n') ADVANCE(296);
       if (lookahead == '!') ADVANCE(74);
       if (lookahead == '"') ADVANCE(354);
-      if (lookahead == '%') ADVANCE(311);
+      if (lookahead == '%') ADVANCE(312);
       if (lookahead == '(') ADVANCE(321);
       if (lookahead == ')') ADVANCE(322);
       if (lookahead == ',') ADVANCE(406);
@@ -3063,7 +3063,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == 'z') ADVANCE(338);
       if (lookahead == '\t' ||
           lookahead == '\r' ||
-          lookahead == ' ') ADVANCE(317);
+          lookahead == ' ') ADVANCE(318);
       if (lookahead == '.' ||
           lookahead == 'H' ||
           ('O' <= lookahead && lookahead <= 'S') ||
@@ -3077,7 +3077,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (eof) ADVANCE(293);
       if (lookahead == '\n') ADVANCE(295);
       if (lookahead == '"') ADVANCE(353);
-      if (lookahead == '%') ADVANCE(310);
+      if (lookahead == '%') ADVANCE(311);
       if (lookahead == '(') ADVANCE(285);
       if (lookahead == '/') ADVANCE(356);
       if (lookahead == '=' ||
@@ -3123,7 +3123,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\n') ADVANCE(297);
       if (lookahead == '!') ADVANCE(74);
       if (lookahead == '"') ADVANCE(354);
-      if (lookahead == '%') ADVANCE(310);
+      if (lookahead == '%') ADVANCE(311);
       if (lookahead == '(') ADVANCE(321);
       if (lookahead == ')') ADVANCE(322);
       if (lookahead == '*') ADVANCE(301);
@@ -3169,7 +3169,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == 'z') ADVANCE(338);
       if (lookahead == '\t' ||
           lookahead == '\r' ||
-          lookahead == ' ') ADVANCE(318);
+          lookahead == ' ') ADVANCE(319);
       if (lookahead == '.' ||
           lookahead == 'u' ||
           lookahead == 'v' ||
@@ -3183,7 +3183,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\n') ADVANCE(297);
       if (lookahead == '!') ADVANCE(74);
       if (lookahead == '"') ADVANCE(354);
-      if (lookahead == '%') ADVANCE(311);
+      if (lookahead == '%') ADVANCE(312);
       if (lookahead == '(') ADVANCE(321);
       if (lookahead == ')') ADVANCE(322);
       if (lookahead == ':') ADVANCE(82);
@@ -3218,7 +3218,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == 'z') ADVANCE(338);
       if (lookahead == '\t' ||
           lookahead == '\r' ||
-          lookahead == ' ') ADVANCE(318);
+          lookahead == ' ') ADVANCE(319);
       if (lookahead == '.' ||
           lookahead == 'H' ||
           ('O' <= lookahead && lookahead <= 'S') ||
@@ -3277,7 +3277,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == 'z') ADVANCE(338);
       if (lookahead == '\t' ||
           lookahead == '\r' ||
-          lookahead == ' ') ADVANCE(318);
+          lookahead == ' ') ADVANCE(319);
       if (lookahead == '.' ||
           lookahead == 'u' ||
           lookahead == 'v' ||
@@ -3293,7 +3293,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
-          lookahead == ' ') ADVANCE(317);
+          lookahead == ' ') ADVANCE(318);
       END_STATE();
     case 295:
       ACCEPT_TOKEN(sym__NEWLINE);
@@ -3303,14 +3303,14 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
-          lookahead == ' ') ADVANCE(317);
+          lookahead == ' ') ADVANCE(318);
       END_STATE();
     case 297:
       ACCEPT_TOKEN(sym__NEWLINE);
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
-          lookahead == ' ') ADVANCE(318);
+          lookahead == ' ') ADVANCE(319);
       END_STATE();
     case 298:
       ACCEPT_TOKEN(anon_sym_BSLASH);
@@ -3369,64 +3369,64 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != '\n') ADVANCE(851);
       END_STATE();
     case 310:
-      ACCEPT_TOKEN(sym_COMMENTLINE);
-      if (lookahead == '%') ADVANCE(316);
-      if (lookahead == 'a') ADVANCE(313);
-      if (lookahead != 0 &&
-          lookahead != '\n') ADVANCE(315);
+      ACCEPT_TOKEN(sym_BEAM_SEPARATOR);
       END_STATE();
     case 311:
       ACCEPT_TOKEN(sym_COMMENTLINE);
-      if (lookahead == '%') ADVANCE(316);
+      if (lookahead == '%') ADVANCE(317);
+      if (lookahead == 'a') ADVANCE(314);
       if (lookahead != 0 &&
-          lookahead != '\n') ADVANCE(315);
+          lookahead != '\n') ADVANCE(316);
       END_STATE();
     case 312:
+      ACCEPT_TOKEN(sym_COMMENTLINE);
+      if (lookahead == '%') ADVANCE(317);
+      if (lookahead != 0 &&
+          lookahead != '\n') ADVANCE(316);
+      END_STATE();
+    case 313:
       ACCEPT_TOKEN(sym_COMMENTLINE);
       if (lookahead == '-') ADVANCE(553);
       if (lookahead != 0 &&
           lookahead != '\n' &&
-          lookahead != '%') ADVANCE(315);
-      END_STATE();
-    case 313:
-      ACCEPT_TOKEN(sym_COMMENTLINE);
-      if (lookahead == 'b') ADVANCE(314);
-      if (lookahead != 0 &&
-          lookahead != '\n' &&
-          lookahead != '%') ADVANCE(315);
+          lookahead != '%') ADVANCE(316);
       END_STATE();
     case 314:
       ACCEPT_TOKEN(sym_COMMENTLINE);
-      if (lookahead == 'c') ADVANCE(312);
+      if (lookahead == 'b') ADVANCE(315);
       if (lookahead != 0 &&
           lookahead != '\n' &&
-          lookahead != '%') ADVANCE(315);
+          lookahead != '%') ADVANCE(316);
       END_STATE();
     case 315:
       ACCEPT_TOKEN(sym_COMMENTLINE);
+      if (lookahead == 'c') ADVANCE(313);
       if (lookahead != 0 &&
           lookahead != '\n' &&
-          lookahead != '%') ADVANCE(315);
+          lookahead != '%') ADVANCE(316);
       END_STATE();
     case 316:
-      ACCEPT_TOKEN(anon_sym_PERCENT_PERCENT);
+      ACCEPT_TOKEN(sym_COMMENTLINE);
+      if (lookahead != 0 &&
+          lookahead != '\n' &&
+          lookahead != '%') ADVANCE(316);
       END_STATE();
     case 317:
-      ACCEPT_TOKEN(aux_sym__MUSIC_CODE_token1);
-      if (lookahead == '\t' ||
-          lookahead == '\n' ||
-          lookahead == '\r' ||
-          lookahead == ' ') ADVANCE(317);
+      ACCEPT_TOKEN(anon_sym_PERCENT_PERCENT);
       END_STATE();
     case 318:
-      ACCEPT_TOKEN(aux_sym__music_content_token1);
+      ACCEPT_TOKEN(aux_sym__MUSIC_CODE_token1);
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
           lookahead == ' ') ADVANCE(318);
       END_STATE();
     case 319:
-      ACCEPT_TOKEN(anon_sym_BQUOTE);
+      ACCEPT_TOKEN(aux_sym__music_content_token1);
+      if (lookahead == '\t' ||
+          lookahead == '\n' ||
+          lookahead == '\r' ||
+          lookahead == ' ') ADVANCE(319);
       END_STATE();
     case 320:
       ACCEPT_TOKEN(aux_sym_beam_token1);
@@ -3902,7 +3902,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(aux_sym_nth_ending_barline_token1);
       if (lookahead == '!') ADVANCE(74);
       if (lookahead == '"') ADVANCE(354);
-      if (lookahead == '%') ADVANCE(311);
+      if (lookahead == '%') ADVANCE(312);
       if (lookahead == '(') ADVANCE(321);
       if (lookahead == ')') ADVANCE(322);
       if (lookahead == ':') ADVANCE(82);
@@ -3937,7 +3937,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\t' ||
           lookahead == '\n' ||
           lookahead == '\r' ||
-          lookahead == ' ') ADVANCE(317);
+          lookahead == ' ') ADVANCE(318);
       if (lookahead == '.' ||
           lookahead == 'H' ||
           ('O' <= lookahead && lookahead <= 'S') ||
@@ -3961,7 +3961,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead == '\n') ADVANCE(296);
       if (lookahead == '!') ADVANCE(74);
       if (lookahead == '"') ADVANCE(354);
-      if (lookahead == '%') ADVANCE(311);
+      if (lookahead == '%') ADVANCE(312);
       if (lookahead == '(') ADVANCE(321);
       if (lookahead == ')') ADVANCE(322);
       if (lookahead == ':') ADVANCE(82);
@@ -3996,7 +3996,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == 'z') ADVANCE(338);
       if (lookahead == '\t' ||
           lookahead == '\r' ||
-          lookahead == ' ') ADVANCE(317);
+          lookahead == ' ') ADVANCE(318);
       if (lookahead == '.' ||
           lookahead == 'H' ||
           ('O' <= lookahead && lookahead <= 'S') ||
@@ -4620,7 +4620,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       ACCEPT_TOKEN(anon_sym_PERCENTabc_DASH);
       if (lookahead != 0 &&
           lookahead != '\n' &&
-          lookahead != '%') ADVANCE(315);
+          lookahead != '%') ADVANCE(316);
       END_STATE();
     case 554:
       ACCEPT_TOKEN(sym_area);
@@ -6751,11 +6751,11 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_DASH] = ACTIONS(1),
     [sym_UNDERSCORE] = ACTIONS(1),
     [sym_TILDE] = ACTIONS(1),
+    [sym_BEAM_SEPARATOR] = ACTIONS(1),
     [sym_COMMENTLINE] = ACTIONS(1),
     [anon_sym_PERCENT_PERCENT] = ACTIONS(1),
     [aux_sym__MUSIC_CODE_token1] = ACTIONS(1),
     [aux_sym__music_content_token1] = ACTIONS(1),
-    [anon_sym_BQUOTE] = ACTIONS(1),
     [sym_slur_open] = ACTIONS(1),
     [sym_slur_close] = ACTIONS(1),
     [aux_sym_note_construct_token1] = ACTIONS(1),
@@ -14167,9 +14167,9 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(185), 1,
       sym_decoration_shorthand,
     ACTIONS(420), 1,
-      aux_sym__MUSIC_CODE_token1,
+      sym_BEAM_SEPARATOR,
     ACTIONS(422), 1,
-      anon_sym_BQUOTE,
+      aux_sym__MUSIC_CODE_token1,
     ACTIONS(424), 1,
       anon_sym_LBRACK,
     ACTIONS(426), 1,
@@ -14203,8 +14203,8 @@ static const uint16_t ts_small_parse_table[] = {
       aux_sym_grace_note_token1,
     ACTIONS(185), 1,
       sym_decoration_shorthand,
-    ACTIONS(422), 1,
-      anon_sym_BQUOTE,
+    ACTIONS(420), 1,
+      sym_BEAM_SEPARATOR,
     ACTIONS(424), 1,
       anon_sym_LBRACK,
     ACTIONS(426), 1,
@@ -14240,8 +14240,8 @@ static const uint16_t ts_small_parse_table[] = {
       aux_sym_grace_note_token1,
     ACTIONS(185), 1,
       sym_decoration_shorthand,
-    ACTIONS(422), 1,
-      anon_sym_BQUOTE,
+    ACTIONS(420), 1,
+      sym_BEAM_SEPARATOR,
     ACTIONS(424), 1,
       anon_sym_LBRACK,
     ACTIONS(426), 1,
@@ -14274,7 +14274,7 @@ static const uint16_t ts_small_parse_table[] = {
       aux_sym_beam_repeat1,
   [661] = 16,
     ACTIONS(440), 1,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
     ACTIONS(443), 1,
       aux_sym_beam_token1,
     ACTIONS(445), 1,
@@ -14314,8 +14314,8 @@ static const uint16_t ts_small_parse_table[] = {
       aux_sym_grace_note_token1,
     ACTIONS(185), 1,
       sym_decoration_shorthand,
-    ACTIONS(422), 1,
-      anon_sym_BQUOTE,
+    ACTIONS(420), 1,
+      sym_BEAM_SEPARATOR,
     ACTIONS(424), 1,
       anon_sym_LBRACK,
     ACTIONS(426), 1,
@@ -14448,8 +14448,8 @@ static const uint16_t ts_small_parse_table[] = {
     STATE(94), 1,
       aux_sym__pitch_repeat1,
     ACTIONS(473), 14,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       aux_sym_note_construct_token1,
       anon_sym_LBRACK,
       anon_sym_RBRACK,
@@ -14468,8 +14468,8 @@ static const uint16_t ts_small_parse_table[] = {
     STATE(93), 1,
       aux_sym__pitch_repeat1,
     ACTIONS(477), 14,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       aux_sym_note_construct_token1,
       anon_sym_LBRACK,
       anon_sym_RBRACK,
@@ -14488,8 +14488,8 @@ static const uint16_t ts_small_parse_table[] = {
     STATE(93), 1,
       aux_sym__pitch_repeat1,
     ACTIONS(482), 14,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       aux_sym_note_construct_token1,
       anon_sym_LBRACK,
       anon_sym_RBRACK,
@@ -14508,8 +14508,8 @@ static const uint16_t ts_small_parse_table[] = {
     STATE(93), 1,
       aux_sym__pitch_repeat1,
     ACTIONS(486), 14,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       aux_sym_note_construct_token1,
       anon_sym_LBRACK,
       anon_sym_RBRACK,
@@ -14528,8 +14528,8 @@ static const uint16_t ts_small_parse_table[] = {
     STATE(95), 1,
       aux_sym__pitch_repeat1,
     ACTIONS(482), 14,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       aux_sym_note_construct_token1,
       anon_sym_LBRACK,
       anon_sym_RBRACK,
@@ -14598,7 +14598,7 @@ static const uint16_t ts_small_parse_table[] = {
     STATE(101), 1,
       aux_sym__pitch_repeat1,
     ACTIONS(482), 12,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       aux_sym_note_construct_token1,
       anon_sym_LBRACK,
@@ -14616,7 +14616,7 @@ static const uint16_t ts_small_parse_table[] = {
     STATE(104), 1,
       aux_sym__pitch_repeat1,
     ACTIONS(482), 12,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       aux_sym_note_construct_token1,
       anon_sym_LBRACK,
@@ -14634,7 +14634,7 @@ static const uint16_t ts_small_parse_table[] = {
     STATE(101), 1,
       aux_sym__pitch_repeat1,
     ACTIONS(477), 12,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       aux_sym_note_construct_token1,
       anon_sym_LBRACK,
@@ -14680,7 +14680,7 @@ static const uint16_t ts_small_parse_table[] = {
     STATE(99), 1,
       aux_sym__pitch_repeat1,
     ACTIONS(473), 12,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       aux_sym_note_construct_token1,
       anon_sym_LBRACK,
@@ -14698,7 +14698,7 @@ static const uint16_t ts_small_parse_table[] = {
     STATE(101), 1,
       aux_sym__pitch_repeat1,
     ACTIONS(486), 12,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       aux_sym_note_construct_token1,
       anon_sym_LBRACK,
@@ -14833,8 +14833,8 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(556), 1,
       sym_rhythm,
     ACTIONS(554), 12,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       aux_sym_note_construct_token1,
       anon_sym_LBRACK,
       anon_sym_RBRACK,
@@ -15089,8 +15089,8 @@ static const uint16_t ts_small_parse_table[] = {
       sym_verse_number,
   [1766] = 1,
     ACTIONS(605), 12,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       aux_sym_note_construct_token1,
       anon_sym_LBRACK,
       anon_sym_RBRACK,
@@ -15355,7 +15355,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(607), 1,
       sym_rhythm,
     ACTIONS(554), 11,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       aux_sym_note_construct_token1,
       anon_sym_LBRACK,
@@ -15370,8 +15370,8 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(611), 1,
       aux_sym_note_construct_token1,
     ACTIONS(609), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15384,7 +15384,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(615), 1,
       sym_rhythm,
     ACTIONS(613), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15398,8 +15398,8 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(619), 1,
       sym_rhythm,
     ACTIONS(617), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15412,7 +15412,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(621), 1,
       aux_sym_note_construct_token1,
     ACTIONS(609), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15426,7 +15426,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(623), 1,
       sym_rhythm,
     ACTIONS(617), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15440,8 +15440,8 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(627), 1,
       aux_sym_note_construct_token1,
     ACTIONS(625), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15454,7 +15454,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(629), 1,
       aux_sym_note_construct_token1,
     ACTIONS(625), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15468,8 +15468,8 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(633), 1,
       sym_rhythm,
     ACTIONS(631), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15482,7 +15482,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(637), 1,
       sym_rhythm,
     ACTIONS(635), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15496,8 +15496,8 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(641), 1,
       aux_sym_note_construct_token1,
     ACTIONS(639), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15510,7 +15510,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(643), 1,
       sym_rhythm,
     ACTIONS(631), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15524,7 +15524,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(645), 1,
       aux_sym_note_construct_token1,
     ACTIONS(639), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15538,8 +15538,8 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(649), 1,
       sym_rhythm,
     ACTIONS(647), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15552,7 +15552,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(653), 1,
       aux_sym_note_construct_token1,
     ACTIONS(651), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15566,8 +15566,8 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(655), 1,
       sym_rhythm,
     ACTIONS(635), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15578,7 +15578,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2395] = 1,
     ACTIONS(605), 11,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       aux_sym_note_construct_token1,
       anon_sym_LBRACK,
@@ -15593,7 +15593,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(657), 1,
       sym_rhythm,
     ACTIONS(647), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15607,7 +15607,7 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(661), 1,
       aux_sym_note_construct_token1,
     ACTIONS(659), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15621,8 +15621,8 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(663), 1,
       aux_sym_note_construct_token1,
     ACTIONS(659), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15635,8 +15635,8 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(665), 1,
       aux_sym_note_construct_token1,
     ACTIONS(651), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15649,8 +15649,8 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(667), 1,
       sym_rhythm,
     ACTIONS(613), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15661,7 +15661,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2489] = 1,
     ACTIONS(669), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15673,8 +15673,8 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2502] = 1,
     ACTIONS(669), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15705,7 +15705,7 @@ static const uint16_t ts_small_parse_table[] = {
       aux_sym_note_construct_repeat1,
   [2544] = 1,
     ACTIONS(647), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15717,8 +15717,8 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2557] = 1,
     ACTIONS(659), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15729,8 +15729,8 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2570] = 1,
     ACTIONS(635), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15741,7 +15741,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2583] = 1,
     ACTIONS(651), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15753,7 +15753,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2596] = 1,
     ACTIONS(659), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15765,8 +15765,8 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2609] = 1,
     ACTIONS(651), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15777,8 +15777,8 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2622] = 1,
     ACTIONS(647), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15803,8 +15803,8 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2652] = 1,
     ACTIONS(625), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15815,7 +15815,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2665] = 1,
     ACTIONS(635), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15827,7 +15827,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2678] = 1,
     ACTIONS(625), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15839,7 +15839,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2691] = 1,
     ACTIONS(639), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15851,7 +15851,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2704] = 1,
     ACTIONS(617), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15863,8 +15863,8 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2717] = 1,
     ACTIONS(639), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15875,8 +15875,8 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2730] = 1,
     ACTIONS(617), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15887,7 +15887,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2743] = 1,
     ACTIONS(676), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15899,7 +15899,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2756] = 1,
     ACTIONS(613), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15911,8 +15911,8 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2769] = 1,
     ACTIONS(613), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -15923,7 +15923,7 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2782] = 1,
     ACTIONS(443), 10,
-      anon_sym_BQUOTE,
+      sym_BEAM_SEPARATOR,
       aux_sym_beam_token1,
       anon_sym_LBRACK,
       sym_alteration,
@@ -15935,8 +15935,8 @@ static const uint16_t ts_small_parse_table[] = {
       sym_decoration_shorthand,
   [2795] = 1,
     ACTIONS(676), 10,
+      sym_BEAM_SEPARATOR,
       aux_sym__MUSIC_CODE_token1,
-      anon_sym_BQUOTE,
       anon_sym_LBRACK,
       sym_alteration,
       sym_note_letter,
@@ -17369,8 +17369,8 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [414] = {.entry = {.count = 1, .reusable = true}}, SHIFT(270),
   [416] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_file_header_info_line, 3, .production_id = 1),
   [418] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_file_header_info_line, 3, .production_id = 1),
-  [420] = {.entry = {.count = 1, .reusable = true}}, SHIFT(49),
-  [422] = {.entry = {.count = 1, .reusable = true}}, SHIFT(91),
+  [420] = {.entry = {.count = 1, .reusable = true}}, SHIFT(91),
+  [422] = {.entry = {.count = 1, .reusable = true}}, SHIFT(49),
   [424] = {.entry = {.count = 1, .reusable = true}}, SHIFT(129),
   [426] = {.entry = {.count = 1, .reusable = true}}, SHIFT(280),
   [428] = {.entry = {.count = 1, .reusable = true}}, SHIFT(103),

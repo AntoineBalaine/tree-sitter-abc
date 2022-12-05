@@ -73,6 +73,10 @@
       "type": "STRING",
       "value": "~"
     },
+    "BEAM_SEPARATOR": {
+      "type": "STRING",
+      "value": "`"
+    },
     "COMMENTLINE": {
       "type": "PATTERN",
       "value": "%[^%\\n]*"
@@ -349,8 +353,8 @@
                   "type": "CHOICE",
                   "members": [
                     {
-                      "type": "STRING",
-                      "value": "`"
+                      "type": "SYMBOL",
+                      "name": "BEAM_SEPARATOR"
                     },
                     {
                       "type": "BLANK"
