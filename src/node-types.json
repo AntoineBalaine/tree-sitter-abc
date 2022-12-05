@@ -117,73 +117,6 @@
     "fields": {}
   },
   {
-    "type": "bar",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "Nth_ending",
-          "named": true
-        },
-        {
-          "type": "annotation",
-          "named": true
-        },
-        {
-          "type": "beam",
-          "named": true
-        },
-        {
-          "type": "chord_note",
-          "named": true
-        },
-        {
-          "type": "chord_symbol",
-          "named": true
-        },
-        {
-          "type": "decoration",
-          "named": true
-        },
-        {
-          "type": "generic_bar_line",
-          "named": true
-        },
-        {
-          "type": "grace_note",
-          "named": true
-        },
-        {
-          "type": "multimeasure_rest",
-          "named": true
-        },
-        {
-          "type": "note_construct",
-          "named": true
-        },
-        {
-          "type": "rhythm",
-          "named": true
-        },
-        {
-          "type": "slur_close",
-          "named": true
-        },
-        {
-          "type": "slur_open",
-          "named": true
-        },
-        {
-          "type": "tuplet_marker",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "beam",
     "named": true,
     "fields": {},
@@ -213,6 +146,10 @@
         },
         {
           "type": "rhythm",
+          "named": true
+        },
+        {
+          "type": "tuplet_marker",
           "named": true
         }
       ]
@@ -498,6 +435,25 @@
     }
   },
   {
+    "type": "file_structure",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "file_header",
+          "named": true
+        },
+        {
+          "type": "tune",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "first_repeat_bar",
     "named": true,
     "fields": {},
@@ -715,6 +671,10 @@
         {
           "type": "note",
           "named": true
+        },
+        {
+          "type": "tuplet_marker",
+          "named": true
         }
       ]
     }
@@ -763,7 +723,7 @@
       "required": true,
       "types": [
         {
-          "type": "tune",
+          "type": "file_structure",
           "named": true
         }
       ]
@@ -861,10 +821,6 @@
         },
         {
           "type": "annotation",
-          "named": true
-        },
-        {
-          "type": "bar",
           "named": true
         },
         {
@@ -1340,10 +1296,6 @@
   },
   {
     "type": "!wedge!",
-    "named": false
-  },
-  {
-    "type": "$",
     "named": false
   },
   {

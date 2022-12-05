@@ -1,14 +1,14 @@
+
+
+
 module.exports = grammar({
   name: 'abc',
 
-  conflicts: $ => [[$._MUSIC_CODE, $.bar],
-  [$._MUSIC_CODE],
-  [$.tune_header]
-  ],
-  extras: $ => [$._space, $._NEWLINE],
+  conflicts: $ => [],
+  extras: _ => [],
   rules: {
     // TODO: add the actual grammar rules
-    source_file: $ => $.tune,
+    source_file: $ => $.file_structure,
 
     _space: _ => / /,
     _NEWLINE: _ => /\n/,
@@ -31,10 +31,10 @@ module.exports = grammar({
     COMMENTLINE: _ => /%[^%\n]*/,
     stylesheet_directives: $ => seq("%%", $.TEXTLINE),
     _MUSIC_CODE: $ => seq(
-      repeat1(
-        choice($.bar, $._music_content)),
-      optional(choice("\\", "$")),
-      /* choice($.COMMENTLINE, $._NEWLINE) */),
+      $._music_content,
+      optional(/[\s\n]+/)
+    ),
+
 
     // FILE STRUCTURE
     file_structure: $ => seq(
@@ -42,7 +42,7 @@ module.exports = grammar({
     ),
     file_header: $ => seq(repeat1(choice($.file_header_info_line, $.stylesheet_directives, $.COMMENTLINE)), $._NEWLINE),
     tune: $ => seq($.tune_header, optional($.tune_body), optional($.lyric_section)),
-    tune_header: $ => seq(repeat1($.tune_header_info_line)),
+    tune_header: $ => prec.left(seq(repeat1($.tune_header_info_line))),
     tune_body: $ => seq($._MUSIC_CODE, repeat1(
       choice(
         $._MUSIC_CODE,
@@ -54,22 +54,21 @@ module.exports = grammar({
     _music_content: $ => choice(
       $.beam,
       $.annotation,
-      $._nte_or_chrd,
+      seq(optional(/\s+/), $._nte_or_chrd, /[\s\n]+/),
       $.slur_open,
       $.slur_close,
-      $.tuplet_marker,
       $.multimeasure_rest,
       $.Nth_ending
     ),
     //NOTES
     //the note prefixes can't be included as a rule, since they will match an empty string
     _nte_or_chrd: $ => choice($.note_construct, $._chord_cstrct),
-    beam: $ => prec(1, seq($._nte_or_chrd, choice(repeat1($._nte_or_chrd), repeat1(seq("`", $._nte_or_chrd))))),
+    beam: $ => prec.right(2, seq($._nte_or_chrd, repeat1(seq(optional("`"), $._nte_or_chrd)), /[\s\n]/)),
 
     slur_open: _ => "(",
     slur_close: _ => ")",
-    note_construct: $ => seq(seq(repeat($.grace_note), optional($.chord_symbol), optional($.decoration)), $.note, optional(/-/)),
-    _chord_cstrct: $ => seq(seq(repeat($.grace_note), optional($.chord_symbol), optional($.decoration)), "[", repeat1($.chord_note), "]", optional($.rhythm)),
+    note_construct: $ => seq(seq(repeat($.grace_note), optional($.chord_symbol), optional($.tuplet_marker), optional($.decoration)), $.note, optional(/-/)),
+    _chord_cstrct: $ => seq(seq(repeat($.grace_note), optional($.chord_symbol), optional($.tuplet_marker), optional($.decoration)), "[", repeat1($.chord_note), "]", optional($.rhythm)),
 
     note: $ => seq(choice($._pitch, $.rest), optional($.rhythm)),
     chord_note: $ => seq(repeat($.grace_note), optional($.decoration), $.note),
@@ -89,7 +88,7 @@ module.exports = grammar({
     grace_note: $ => seq(/\{(\/)?/, repeat1($._pitch), /\}/),
     chord_symbol_note: $ => seq($.note_letter, optional($.alteration)),
     chord_symbol: $ => seq(/\"/, $.chord_symbol_note, optional($.chord_type), optional(seq(/\//, $.chord_symbol_note)), /\"/),
-    annotation: $ => /\"[^\"\n]*\"/,
+    annotation: _ => /\"[^\"\n]*\"/,
     tuplet_marker: _ => /\(\d+(((:\d+){1,2})(::\d+))?\s*/,
     decoration: $ => $.decoration_shorthand,
     chord_type: _ => token.immediate(choice("minor", "major", "diminished", "augmented", "suspended", "7", "9", /\w+/)),

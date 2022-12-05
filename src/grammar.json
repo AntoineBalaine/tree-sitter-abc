@@ -3,7 +3,7 @@
   "rules": {
     "source_file": {
       "type": "SYMBOL",
-      "name": "tune"
+      "name": "file_structure"
     },
     "_space": {
       "type": "PATTERN",
@@ -94,36 +94,15 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "REPEAT1",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "bar"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_music_content"
-              }
-            ]
-          }
+          "type": "SYMBOL",
+          "name": "_music_content"
         },
         {
           "type": "CHOICE",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "\\"
-                },
-                {
-                  "type": "STRING",
-                  "value": "$"
-                }
-              ]
+              "type": "PATTERN",
+              "value": "[\\s\\n]+"
             },
             {
               "type": "BLANK"
@@ -232,16 +211,20 @@
       ]
     },
     "tune_header": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SYMBOL",
-            "name": "tune_header_info_line"
+      "type": "PREC_LEFT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "REPEAT1",
+            "content": {
+              "type": "SYMBOL",
+              "name": "tune_header_info_line"
+            }
           }
-        }
-      ]
+        ]
+      }
     },
     "tune_body": {
       "type": "SEQ",
@@ -288,8 +271,29 @@
           "name": "annotation"
         },
         {
-          "type": "SYMBOL",
-          "name": "_nte_or_chrd"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "PATTERN",
+                  "value": "\\s+"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_nte_or_chrd"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[\\s\\n]+"
+            }
+          ]
         },
         {
           "type": "SYMBOL",
@@ -298,10 +302,6 @@
         {
           "type": "SYMBOL",
           "name": "slur_close"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "tuplet_marker"
         },
         {
           "type": "SYMBOL",
@@ -327,8 +327,8 @@
       ]
     },
     "beam": {
-      "type": "PREC",
-      "value": 1,
+      "type": "PREC_RIGHT",
+      "value": 2,
       "content": {
         "type": "SEQ",
         "members": [
@@ -337,32 +337,32 @@
             "name": "_nte_or_chrd"
           },
           {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "REPEAT1",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "_nte_or_chrd"
-                }
-              },
-              {
-                "type": "REPEAT1",
-                "content": {
-                  "type": "SEQ",
+            "type": "REPEAT1",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "CHOICE",
                   "members": [
                     {
                       "type": "STRING",
                       "value": "`"
                     },
                     {
-                      "type": "SYMBOL",
-                      "name": "_nte_or_chrd"
+                      "type": "BLANK"
                     }
                   ]
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_nte_or_chrd"
                 }
-              }
-            ]
+              ]
+            }
+          },
+          {
+            "type": "PATTERN",
+            "value": "[\\s\\n]"
           }
         ]
       }
@@ -394,6 +394,18 @@
                 {
                   "type": "SYMBOL",
                   "name": "chord_symbol"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "tuplet_marker"
                 },
                 {
                   "type": "BLANK"
@@ -451,6 +463,18 @@
                 {
                   "type": "SYMBOL",
                   "name": "chord_symbol"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "tuplet_marker"
                 },
                 {
                   "type": "BLANK"
@@ -559,35 +583,32 @@
       ]
     },
     "_pitch": {
-      "type": "IMMEDIATE_TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "CHOICE",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "alteration"
-              },
-              {
-                "type": "BLANK"
-              }
-            ]
-          },
-          {
-            "type": "SYMBOL",
-            "name": "note_letter"
-          },
-          {
-            "type": "REPEAT",
-            "content": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
               "type": "SYMBOL",
-              "name": "octave"
+              "name": "alteration"
+            },
+            {
+              "type": "BLANK"
             }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "note_letter"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "octave"
           }
-        ]
-      }
+        }
+      ]
     },
     "alteration": {
       "type": "PATTERN",
@@ -2288,28 +2309,8 @@
       ]
     }
   },
-  "extras": [
-    {
-      "type": "SYMBOL",
-      "name": "_space"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "_NEWLINE"
-    }
-  ],
-  "conflicts": [
-    [
-      "_MUSIC_CODE",
-      "bar"
-    ],
-    [
-      "_MUSIC_CODE"
-    ],
-    [
-      "tune_header"
-    ]
-  ],
+  "extras": [],
+  "conflicts": [],
   "precedences": [],
   "externals": [],
   "inline": [],
