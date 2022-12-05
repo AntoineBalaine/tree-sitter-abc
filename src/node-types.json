@@ -345,6 +345,25 @@
     }
   },
   {
+    "type": "file_structure",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "file_header",
+          "named": true
+        },
+        {
+          "type": "tune",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "first_repeat_bar",
     "named": true,
     "fields": {},
@@ -663,7 +682,7 @@
       "required": true,
       "types": [
         {
-          "type": "tune",
+          "type": "file_structure",
           "named": true
         }
       ]
@@ -1009,10 +1028,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "\n",
-    "named": false
   },
   {
     "type": "!+!",

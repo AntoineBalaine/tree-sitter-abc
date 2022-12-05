@@ -8,7 +8,7 @@ module.exports = grammar({
   extras: _ => [],
   rules: {
     // TODO: add the actual grammar rules
-    source_file: $ => $.tune,
+    source_file: $ => $.file_structure,
 
     _space: _ => / /,
     _NL: _ => "\n",
@@ -38,8 +38,9 @@ module.exports = grammar({
 
     // FILE STRUCTURE
     file_structure: $ => seq(
-      optional($.file_header), $.tune, repeat(seq($._NL, $.tune))
-      , $._NL),
+      optional($.file_header),
+      repeat1($.tune),
+    ),
     file_header: $ => repeat1(
       seq(
         choice($.file_header_info_line, $.stylesheet_directives, $.COMMENT),
@@ -49,7 +50,7 @@ module.exports = grammar({
     tune: $ => seq($.tune_header, optional(seq($.tune_body, repeat($._NL))), optional($.lyric_section), $._NL),
     tune_header: $ => prec.left(seq(
       $.reference_number_line,
-      repeat(seq(choice($.tune_header_info_line, $.COMMENT), "\n")),
+      repeat(seq(choice($.tune_header_info_line, $.COMMENT), $._NL)),
     )),
     tune_body: $ => seq($._MUSIC_CODE, repeat(
       seq(choice(

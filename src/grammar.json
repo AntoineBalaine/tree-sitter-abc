@@ -3,7 +3,7 @@
   "rules": {
     "source_file": {
       "type": "SYMBOL",
-      "name": "tune"
+      "name": "file_structure"
     },
     "_space": {
       "type": "PATTERN",
@@ -135,28 +135,11 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "tune"
-        },
-        {
-          "type": "REPEAT",
+          "type": "REPEAT1",
           "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "_NL"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "tune"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "tune"
           }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_NL"
         }
       ]
     },
@@ -270,8 +253,8 @@
                   ]
                 },
                 {
-                  "type": "STRING",
-                  "value": "\n"
+                  "type": "SYMBOL",
+                  "name": "_NL"
                 }
               ]
             }
