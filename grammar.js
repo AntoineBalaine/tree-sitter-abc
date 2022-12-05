@@ -73,7 +73,7 @@ module.exports = grammar({
     //NOTES
     //the note prefixes can't be included as a rule, since they will match an empty string
     _nte_or_chrd: $ => choice($.note_construct, $._chord_cstrct),
-    beam: $ => prec.right(2, seq($._nte_or_chrd, repeat1(seq(optional($.BEAM_SEPARATOR), $._nte_or_chrd)), /[\s]*/)),
+    beam: $ => prec.right(2, seq($._nte_or_chrd, repeat1(seq(optional($.BEAM_SEPARATOR), $._nte_or_chrd)), /[\s]+/)),
 
     slur_open: _ => "(",
     slur_close: _ => ")",
