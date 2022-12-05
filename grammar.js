@@ -13,7 +13,7 @@ module.exports = grammar({
     _space: _ => / /,
     _NL: _ => "\n",
     TEXTLINE: $ => seq($.TEXT, $._NL),
-    noCommentText: $ => (/[^%\n]+/),
+    noCommentText: _ => (/[^%\n]+/),
 
 
     SLASH: _ => seq("\\"),
@@ -39,7 +39,7 @@ module.exports = grammar({
     // FILE STRUCTURE
     file_structure: $ => seq(
       optional($.file_header),
-      repeat1($.tune),
+      repeat1(seq($.tune, repeat($._NL))),
     ),
     file_header: $ => repeat1(
       seq(
@@ -47,7 +47,7 @@ module.exports = grammar({
         repeat1($._NL)
       ),
     ),
-    tune: $ => seq($.tune_header, optional(seq($.tune_body, repeat($._NL))), optional($.lyric_section), $._NL),
+    tune: $ => prec.left(seq($.tune_header, optional(seq($.tune_body, repeat($._NL))), optional($.lyric_section))),
     tune_header: $ => prec.left(seq(
       $.reference_number_line,
       repeat(seq(choice($.tune_header_info_line, $.COMMENT), $._NL)),
