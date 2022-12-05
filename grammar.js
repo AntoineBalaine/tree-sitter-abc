@@ -8,17 +8,17 @@ module.exports = grammar({
   extras: _ => [],
   rules: {
     // TODO: add the actual grammar rules
-    source_file: $ => $.file_structure,
+    source_file: $ => $.tune,
 
     _space: _ => / /,
-    _NEWLINE: _ => /\n/,
-    TEXTLINE: $ => seq($.TEXT, $._NEWLINE),
-
+    _NL: _ => "\n",
+    TEXTLINE: $ => seq($.TEXT, $._NL),
+    noCommentText: $ => (/[^%\n]+/),
 
 
     SLASH: _ => seq("\\"),
     plus: _ => seq("+"),
-    //ms_cnt_ln: $ => seq($.TEXT, $.SLASH, $._NEWLINE),
+    //ms_cnt_ln: $ => seq($.TEXT, $.SLASH, $._NL),
     field_header: _ => seq(/\w/, ":"),
     note_skip: _ => ("*"),
     HYPHEN: _ => ("-"),
@@ -28,34 +28,42 @@ module.exports = grammar({
 
     // TYPES OF LINES
     // info_field: $ => seq($.field_header, $.TEXTLINE, repeat(seq($.plus, $.TEXTLINE))),
-    COMMENTLINE: _ => /%[^%\n]*/,
-    stylesheet_directives: $ => seq("%%", $.TEXTLINE),
+    COMMENT: _ => /%[^%\n]*/,
+    stylesheet_directives: $ => seq("%%", $.noCommentText),
     _MUSIC_CODE: $ => seq(
       $._music_content,
-      optional(/[\s\n]+/)
+      optional(/[\s]+/)
     ),
 
 
     // FILE STRUCTURE
     file_structure: $ => seq(
-      optional($.file_header), $.tune, repeat(seq($._NEWLINE, $.tune))
+      optional($.file_header), $.tune, repeat(seq($._NL, $.tune))
+      , $._NL),
+    file_header: $ => repeat1(
+      seq(
+        choice($.file_header_info_line, $.stylesheet_directives, $.COMMENT),
+        repeat1($._NL)
+      ),
     ),
-    file_header: $ => seq(repeat1(choice($.file_header_info_line, $.stylesheet_directives, $.COMMENTLINE)), $._NEWLINE),
-    tune: $ => seq($.tune_header, optional($.tune_body), optional($.lyric_section)),
-    tune_header: $ => prec.left(seq(repeat1($.tune_header_info_line))),
-    tune_body: $ => seq($._MUSIC_CODE, repeat1(
-      choice(
+    tune: $ => seq($.tune_header, optional(seq($.tune_body, repeat($._NL))), optional($.lyric_section), $._NL),
+    tune_header: $ => prec.left(seq(
+      $.reference_number_line,
+      repeat(seq(choice($.tune_header_info_line, $.COMMENT), "\n")),
+    )),
+    tune_body: $ => seq($._MUSIC_CODE, repeat(
+      seq(choice(
         $._MUSIC_CODE,
         $.body_info_line,
-        $.COMMENTLINE,
-        $.stylesheet_directives))),
+        $.COMMENT,
+        $.stylesheet_directives)))),
 
     // BODY
     _music_content: $ => choice(
       $.generic_bar_line,
       $.beam,
       $.annotation,
-      seq(optional(/\s+/), $._nte_or_chrd, /[\s\n]+/),
+      seq(optional(/\s+/), $._nte_or_chrd, /[\s]+/),
       $.slur_open,
       $.slur_close,
       $.multimeasure_rest,
@@ -64,7 +72,7 @@ module.exports = grammar({
     //NOTES
     //the note prefixes can't be included as a rule, since they will match an empty string
     _nte_or_chrd: $ => choice($.note_construct, $._chord_cstrct),
-    beam: $ => prec.right(2, seq($._nte_or_chrd, repeat1(seq(optional($.BEAM_SEPARATOR), $._nte_or_chrd)), /[\s\n]/)),
+    beam: $ => prec.right(2, seq($._nte_or_chrd, repeat1(seq(optional($.BEAM_SEPARATOR), $._nte_or_chrd)), /[\s]*/)),
 
     slur_open: _ => "(",
     slur_close: _ => ")",
@@ -127,7 +135,7 @@ module.exports = grammar({
     second_repeat_bar: $ => seq(($.end_of_repeated_section), optional(seq(/\s/, "[")), /[0-9]+/),
 
     //LYRICS
-    lyric_line: $ => seq($.words_postbody, $._NEWLINE),
+    lyric_line: $ => seq($.words_postbody, /[^\n]*/, $._NL),
     lyric_section: $ => repeat1($.lyric_line),
 
     lyric_syllable: _ => seq(/\w+/),
@@ -180,7 +188,7 @@ module.exports = grammar({
     notes: _ => "N:",
     origin: _ => "O:",
     parts_line: _ => "P:",
-    reference_number: _ => seq("X:", /[0-9]/),
+    reference_number_line: $ => seq("X:", /[0-9]/, /[^\n]*/, optional($.COMMENT), $._NL),
     remark: _ => "r:",
     rhythm_line: _ => "R:",
     source: _ => "S:",
@@ -191,10 +199,10 @@ module.exports = grammar({
     unit_note_length: _ => "L:",
     user_defined: $ => seq("U:", choice(/[h-w]/, /H-W/), "=", $.symbol),
     voice: _ => "V:",
-    words_line: $ => seq("w:", repeat1($.lyric_text), $._NEWLINE, repeat(seq(/\+:/, repeat1($.lyric_text)))),
+    words_line: $ => seq("w:", repeat1($.lyric_text), $._NL, repeat(seq(/\+:/, repeat1($.lyric_text)))),
     words_postbody: _ => "W:",
 
-    body_info_line: $ => seq(choice(
+    body_info_line: $ => prec.left(seq(choice(
       field("type", $.instruction),
       field("type", $.key),
       field("type", $.macros),
@@ -210,10 +218,11 @@ module.exports = grammar({
       field("type", $.user_defined),
       field("type", $.voice),
       field("type", $.words_line),
-    ), /.*/, "\n", choice($._NEWLINE, $.COMMENTLINE)),
+    ), $.noCommentText, optional($.COMMENT))),
 
     tune_header_info_line: $ => seq(
-      choice(field("type", $.abc_version),
+      choice(
+        field("type", $.abc_version),
         field("type", $.area),
         field("type", $.book),
         field("type", $.composer),
@@ -228,7 +237,6 @@ module.exports = grammar({
         field("type", $.notes),
         field("type", $.origin),
         field("type", $.parts_line),
-        field("type", $.reference_number),
         field("type", $.remark),
         field("type", $.rhythm_line),
         field("type", $.source),
@@ -240,7 +248,8 @@ module.exports = grammar({
         field("type", $.user_defined),
         field("type", $.voice),
         field("type", $.words_postbody)
-      ), /.*/, choice($._NEWLINE, $.COMMENTLINE)),
+      ), $.noCommentText, optional($.COMMENT)),
+
 
     file_header_info_line: $ => seq(choice(
       field("type", $.abc_version),
@@ -262,7 +271,7 @@ module.exports = grammar({
       field("type", $.transcription),
       field("type", $.unit_note_length),
       field("type", $.user_defined),
-    ), /[^%]*/, choice($._NEWLINE, $.COMMENTLINE)),
+    ), $.noCommentText, optional($.COMMENT)),
 
 
   }

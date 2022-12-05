@@ -1,3 +1,10 @@
 X:1
-ABC "hello"  | _c'//`^a/4`b/4 {gab}A
-ABC "hello" _c'//`^a/4`b/4 | !trill!{gab}A
+%abc-2.1
+H:This file contains some example English tunes
+% note that the comments (like this one) are to highlight usages
+%  and would not normally be included in such detail
+O:England             % the origin of all tunes is England
+abc
+W:hehoho
+W:hehehe
+
