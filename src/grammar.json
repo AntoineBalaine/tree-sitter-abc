@@ -264,6 +264,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "generic_bar_line"
+        },
+        {
+          "type": "SYMBOL",
           "name": "beam"
         },
         {
@@ -309,7 +313,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "Nth_ending"
+          "name": "symbol"
         }
       ]
     },
@@ -811,33 +815,9 @@
       "type": "PATTERN",
       "value": "[\\.~HLMOPSTuv]"
     },
-    "bar": {
+    "nth_ending_barline": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_music_content"
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "generic_bar_line"
-        }
-      ]
-    },
-    "Nth_ending": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "nth_ending_number"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_music_content"
-        },
         {
           "type": "CHOICE",
           "members": [
@@ -862,6 +842,14 @@
               "name": "open_thick_thin_double_bar_line"
             }
           ]
+        },
+        {
+          "type": "PATTERN",
+          "value": "[\\s]*"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "nth_ending_number"
         }
       ]
     },
@@ -977,6 +965,10 @@
         {
           "type": "SYMBOL",
           "name": "bar_line"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "nth_ending_barline"
         }
       ]
     },
@@ -1124,7 +1116,7 @@
       ]
     },
     "symbol": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
           "type": "STRING",

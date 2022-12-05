@@ -5,93 +5,6 @@
     "fields": {}
   },
   {
-    "type": "Nth_ending",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "Nth_ending",
-          "named": true
-        },
-        {
-          "type": "annotation",
-          "named": true
-        },
-        {
-          "type": "bar_line",
-          "named": true
-        },
-        {
-          "type": "beam",
-          "named": true
-        },
-        {
-          "type": "chord_note",
-          "named": true
-        },
-        {
-          "type": "chord_symbol",
-          "named": true
-        },
-        {
-          "type": "close_thin_thick_double_bar_line",
-          "named": true
-        },
-        {
-          "type": "decoration",
-          "named": true
-        },
-        {
-          "type": "end_of_repeated_section",
-          "named": true
-        },
-        {
-          "type": "grace_note",
-          "named": true
-        },
-        {
-          "type": "multimeasure_rest",
-          "named": true
-        },
-        {
-          "type": "note_construct",
-          "named": true
-        },
-        {
-          "type": "nth_ending_number",
-          "named": true
-        },
-        {
-          "type": "open_thick_thin_double_bar_line",
-          "named": true
-        },
-        {
-          "type": "rhythm",
-          "named": true
-        },
-        {
-          "type": "slur_close",
-          "named": true
-        },
-        {
-          "type": "slur_open",
-          "named": true
-        },
-        {
-          "type": "thin_double_bar_line",
-          "named": true
-        },
-        {
-          "type": "tuplet_marker",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "TEXT",
     "named": true,
     "fields": {}
@@ -493,6 +406,10 @@
           "named": true
         },
         {
+          "type": "nth_ending_barline",
+          "named": true
+        },
+        {
           "type": "open_thick_thin_double_bar_line",
           "named": true
         },
@@ -680,6 +597,41 @@
     }
   },
   {
+    "type": "nth_ending_barline",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bar_line",
+          "named": true
+        },
+        {
+          "type": "close_thin_thick_double_bar_line",
+          "named": true
+        },
+        {
+          "type": "end_of_repeated_section",
+          "named": true
+        },
+        {
+          "type": "nth_ending_number",
+          "named": true
+        },
+        {
+          "type": "open_thick_thin_double_bar_line",
+          "named": true
+        },
+        {
+          "type": "thin_double_bar_line",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "nth_ending_number",
     "named": true,
     "fields": {}
@@ -816,10 +768,6 @@
           "named": true
         },
         {
-          "type": "Nth_ending",
-          "named": true
-        },
-        {
           "type": "annotation",
           "named": true
         },
@@ -841,6 +789,10 @@
         },
         {
           "type": "decoration",
+          "named": true
+        },
+        {
+          "type": "generic_bar_line",
           "named": true
         },
         {
@@ -869,6 +821,10 @@
         },
         {
           "type": "stylesheet_directives",
+          "named": true
+        },
+        {
+          "type": "symbol",
           "named": true
         },
         {

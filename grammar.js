@@ -4,7 +4,7 @@
 module.exports = grammar({
   name: 'abc',
 
-  conflicts: $ => [],
+  conflicts: _ => [],
   extras: _ => [],
   rules: {
     // TODO: add the actual grammar rules
@@ -52,13 +52,14 @@ module.exports = grammar({
 
     // BODY
     _music_content: $ => choice(
+      $.generic_bar_line,
       $.beam,
       $.annotation,
       seq(optional(/\s+/), $._nte_or_chrd, /[\s\n]+/),
       $.slur_open,
       $.slur_close,
       $.multimeasure_rest,
-      $.Nth_ending
+      $.symbol
     ),
     //NOTES
     //the note prefixes can't be included as a rule, since they will match an empty string
@@ -95,10 +96,19 @@ module.exports = grammar({
     decoration_shorthand: _ => /[\.~HLMOPSTuv]/,
 
     //BAR LINES
-    bar: $ => seq(repeat($._music_content), $.generic_bar_line),
-    Nth_ending: $ => seq($.nth_ending_number, $._music_content,
-      choice($.bar_line, $.thin_double_bar_line
-        , $.end_of_repeated_section, $.close_thin_thick_double_bar_line, $.open_thick_thin_double_bar_line)),
+    // bar: $ => seq(repeat($._music_content), $.generic_bar_line),
+    nth_ending_barline: $ => seq(
+      choice(
+        $.bar_line,
+        $.thin_double_bar_line,
+        $.end_of_repeated_section,
+        $.close_thin_thick_double_bar_line,
+        $.open_thick_thin_double_bar_line),
+      /[\s]*/,
+      $.nth_ending_number),
+    // Nth_ending: $ => seq($.nth_ending_number, $._music_content,
+    // choice($.bar_line, $.thin_double_bar_line
+    //   , $.end_of_repeated_section, $.close_thin_thick_double_bar_line, $.open_thick_thin_double_bar_line)),
     // variant_ending: $ => seq($.parts_line, /\n/, repeat1($.Nth_ending)), // TBFinished: add music inside the bars,
 
     nth_ending_number: _ => seq("[", /[0-9]/, optional(repeat(seq(choice(",", "-"), /[0-9]/)))),
@@ -112,7 +122,7 @@ module.exports = grammar({
     generic_bar_line: $ => choice($.thin_double_bar_line, $.close_thin_thick_double_bar_line,
       $.open_thick_thin_double_bar_line,
       $.start_of_repeated_section, $.end_of_repeated_section,
-      $.start_end_of_two_repeated_sections, $.first_repeat_bar, $.second_repeat_bar, $.bar_line),
+      $.start_end_of_two_repeated_sections, $.first_repeat_bar, $.second_repeat_bar, $.bar_line, $.nth_ending_barline),
     first_repeat_bar: $ => seq($.bar_line, optional(seq(/\s/, "[")), /[0-9]+/),
     second_repeat_bar: $ => seq(($.end_of_repeated_section), optional(seq(/\s/, "[")), /[0-9]+/),
 
@@ -127,7 +137,7 @@ module.exports = grammar({
       $.TILDE, $.note_skip),
 
     //SYMBOLS
-    symbol: _ => seq("!trill!", "!trill(!", "!trill)!", "!lowermordent!", "!uppermordent!", "!mordent!", "!pralltriller!", "!roll!", "!turn!", "!turnx!", "!invertedturn!", "!invertedturnx!", "!arpeggio!", "!>!", "!accent!", "!emphasis!", "!fermata!", "!invertedfermata!", "!tenuto!", "!0! - !5!", "!+!", "!plus!", "!snap!", "!slide!", "!wedge!", "!upbow!", "!downbow!", "!open!", "!thumb!", "!breath!", "!pppp!", "!ppp!", "!pp!", "!p!", "!mp!", "!mf!", "!f!", "!ff!", "!fff!", "!ffff!", "!sfz!", "!crescendo(!", "!<(!", "!crescendo)!", "!<)!", "!diminuendo(!", "!>(!", "!diminuendo)!", "!>)!", "!segno!", "!coda!", "!D.S.!", "!D.C.!", "!dacoda!", "!dacapo!", "!fine!", "!shortphrase!", "!mediumphrase!", "!longphrase!"),
+    symbol: _ => choice("!trill!", "!trill(!", "!trill)!", "!lowermordent!", "!uppermordent!", "!mordent!", "!pralltriller!", "!roll!", "!turn!", "!turnx!", "!invertedturn!", "!invertedturnx!", "!arpeggio!", "!>!", "!accent!", "!emphasis!", "!fermata!", "!invertedfermata!", "!tenuto!", "!0! - !5!", "!+!", "!plus!", "!snap!", "!slide!", "!wedge!", "!upbow!", "!downbow!", "!open!", "!thumb!", "!breath!", "!pppp!", "!ppp!", "!pp!", "!p!", "!mp!", "!mf!", "!f!", "!ff!", "!fff!", "!ffff!", "!sfz!", "!crescendo(!", "!<(!", "!crescendo)!", "!<)!", "!diminuendo(!", "!>(!", "!diminuendo)!", "!>)!", "!segno!", "!coda!", "!D.S.!", "!D.C.!", "!dacoda!", "!dacapo!", "!fine!", "!shortphrase!", "!mediumphrase!", "!longphrase!"),
 
 
     // // INFO LINES
