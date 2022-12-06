@@ -8,7 +8,8 @@ module.exports = grammar({
   extras: _ => [],
   rules: {
     // TODO: add the actual grammar rules
-    source_file: $ => $.file_structure,
+    source_file: $ =>
+      $.file_structure,
 
     _space: _ => / /,
     _NL: _ => "\n",
@@ -55,20 +56,23 @@ module.exports = grammar({
     tune_body: $ => seq($._MUSIC_CODE, repeat(
       seq(choice(
         $._MUSIC_CODE,
-        $.body_info_line,
-        $.COMMENT,
-        $.stylesheet_directives)))),
+        seq($.body_info_line, $._NL),
+        seq($.COMMENT, $._NL),
+        $.stylesheet_directives),
+      ))),
 
     // BODY
     _music_content: $ => choice(
       $.generic_bar_line,
       $.beam,
       $.annotation,
-      seq(optional(/\s+/), $._nte_or_chrd, /[\s]+/),
+      seq($._nte_or_chrd, /[\s]+/),
       $.slur_open,
       $.slur_close,
       $.multimeasure_rest,
-      $.symbol
+      $.symbol,
+      $.body_inline_info,
+      "\\"
     ),
     //NOTES
     //the note prefixes can't be included as a rule, since they will match an empty string
@@ -111,15 +115,15 @@ module.exports = grammar({
 
     //BAR LINES
     // bar: $ => seq(repeat($._music_content), $.generic_bar_line),
-    nth_ending_barline: $ => seq(
+    nth_ending_barline: $ => prec(2, seq(
       choice(
         $.bar_line,
         $.thin_double_bar_line,
         $.end_of_repeated_section,
         $.close_thin_thick_double_bar_line,
         $.open_thick_thin_double_bar_line),
-      /[\s]*/,
-      $.nth_ending_number),
+      optional(/[\s]+/),
+      $.nth_ending_number)),
     // Nth_ending: $ => seq($.nth_ending_number, $._music_content,
     // choice($.bar_line, $.thin_double_bar_line
     //   , $.end_of_repeated_section, $.close_thin_thick_double_bar_line, $.open_thick_thin_double_bar_line)),
@@ -134,6 +138,7 @@ module.exports = grammar({
     end_of_repeated_section: _ => ":|",
     start_end_of_two_repeated_sections: _ => "::",
     generic_bar_line: $ => choice(
+      $.nth_ending_barline,
       $.thin_double_bar_line,
       $.close_thin_thick_double_bar_line,
       $.open_thick_thin_double_bar_line,
@@ -142,7 +147,6 @@ module.exports = grammar({
       $.first_repeat_bar,
       $.second_repeat_bar,
       $.bar_line,
-      $.nth_ending_barline
     ),
     first_repeat_bar: $ => seq($.bar_line, optional(seq(/\s/, "[")), /[0-9]+/),
     second_repeat_bar: $ => seq(($.end_of_repeated_section), optional(seq(/\s/, "[")), /[0-9]+/),
@@ -183,7 +187,7 @@ module.exports = grammar({
       $.unit_note_length,
       $.user_defined,
       $.voice
-    ), /[^\]]*/, "]"),
+    ), /[^%\n\]]*/, "]"),
 
     TEXT: _ => /[^\]]*/,
     abc_version: _ => seq("%abc-", /[0-9]/, repeat(seq(".", /[0-9]/))),

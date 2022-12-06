@@ -294,12 +294,30 @@
                     "name": "_MUSIC_CODE"
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "body_info_line"
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "body_info_line"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_NL"
+                      }
+                    ]
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "COMMENT"
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "COMMENT"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "_NL"
+                      }
+                    ]
                   },
                   {
                     "type": "SYMBOL",
@@ -331,18 +349,6 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "\\s+"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
               "type": "SYMBOL",
               "name": "_nte_or_chrd"
             },
@@ -367,6 +373,14 @@
         {
           "type": "SYMBOL",
           "name": "symbol"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "body_inline_info"
+        },
+        {
+          "type": "STRING",
+          "value": "\\"
         }
       ]
     },
@@ -861,42 +875,54 @@
       "value": "[\\.~HLMOPSTuv]"
     },
     "nth_ending_barline": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "bar_line"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "thin_double_bar_line"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "end_of_repeated_section"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "close_thin_thick_double_bar_line"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "open_thick_thin_double_bar_line"
-            }
-          ]
-        },
-        {
-          "type": "PATTERN",
-          "value": "[\\s]*"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "nth_ending_number"
-        }
-      ]
+      "type": "PREC",
+      "value": 2,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "bar_line"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "thin_double_bar_line"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "end_of_repeated_section"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "close_thin_thick_double_bar_line"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "open_thick_thin_double_bar_line"
+              }
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[\\s]+"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "nth_ending_number"
+          }
+        ]
+      }
     },
     "nth_ending_number": {
       "type": "SEQ",
@@ -977,6 +1003,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "nth_ending_barline"
+        },
+        {
+          "type": "SYMBOL",
           "name": "thin_double_bar_line"
         },
         {
@@ -1010,10 +1040,6 @@
         {
           "type": "SYMBOL",
           "name": "bar_line"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "nth_ending_barline"
         }
       ]
     },
@@ -1528,7 +1554,7 @@
         },
         {
           "type": "PATTERN",
-          "value": "[^\\]]*"
+          "value": "[^%\\n\\]]*"
         },
         {
           "type": "STRING",
