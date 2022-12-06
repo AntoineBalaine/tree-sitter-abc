@@ -30,6 +30,10 @@
           "named": true
         },
         {
+          "type": "close_chord",
+          "named": true
+        },
+        {
           "type": "decoration",
           "named": true
         },
@@ -39,6 +43,10 @@
         },
         {
           "type": "note_construct",
+          "named": true
+        },
+        {
+          "type": "open_chord",
           "named": true
         },
         {
@@ -117,7 +125,7 @@
             "named": true
           },
           {
-            "type": "words_line",
+            "type": "words_tag",
             "named": true
           }
         ]
@@ -261,6 +269,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "close_chord",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "decoration",
@@ -546,45 +559,6 @@
     "fields": {}
   },
   {
-    "type": "lyric_text",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "HYPHEN",
-          "named": true
-        },
-        {
-          "type": "TILDE",
-          "named": true
-        },
-        {
-          "type": "UNDERSCORE",
-          "named": true
-        },
-        {
-          "type": "bar_line",
-          "named": true
-        },
-        {
-          "type": "lyric_syllable",
-          "named": true
-        },
-        {
-          "type": "note_skip",
-          "named": true
-        },
-        {
-          "type": "verse_number",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "multimeasure_rest",
     "named": true,
     "fields": {}
@@ -688,6 +662,11 @@
   },
   {
     "type": "nth_ending_number",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "open_chord",
     "named": true,
     "fields": {}
   },
@@ -857,6 +836,10 @@
           "named": true
         },
         {
+          "type": "close_chord",
+          "named": true
+        },
+        {
           "type": "decoration",
           "named": true
         },
@@ -874,6 +857,10 @@
         },
         {
           "type": "note_construct",
+          "named": true
+        },
+        {
+          "type": "open_chord",
           "named": true
         },
         {
@@ -1075,21 +1062,6 @@
     "type": "verse_number",
     "named": true,
     "fields": {}
-  },
-  {
-    "type": "words_line",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "lyric_text",
-          "named": true
-        }
-      ]
-    }
   },
   {
     "type": "!+!",
@@ -1580,11 +1552,11 @@
     "named": true
   },
   {
-    "type": "w:",
-    "named": false
+    "type": "words_postbody",
+    "named": true
   },
   {
-    "type": "words_postbody",
+    "type": "words_tag",
     "named": true
   }
 ]

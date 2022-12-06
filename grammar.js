@@ -26,6 +26,8 @@ module.exports = grammar({
     UNDERSCORE: _ => ("_"),
     TILDE: _ => ("~"),
     BEAM_SEPARATOR: _ => "`",
+    open_chord: _ => "[",
+    close_chord: _ => "]",
 
     // TYPES OF LINES
     // info_field: $ => seq($.field_header, $.TEXTLINE, repeat(seq($.plus, $.TEXTLINE))),
@@ -72,7 +74,7 @@ module.exports = grammar({
       $.multimeasure_rest,
       $.symbol,
       $.body_inline_info,
-      "\\"
+      "\\",
     ),
     //NOTES
     //the note prefixes can't be included as a rule, since they will match an empty string
@@ -87,7 +89,7 @@ module.exports = grammar({
     slur_open: _ => "(",
     slur_close: _ => ")",
     note_construct: $ => seq(seq(repeat($.grace_note), optional($.chord_symbol), optional($.tuplet_marker), optional($.decoration)), $.note, optional(/-/)),
-    _chord_cstrct: $ => seq(seq(repeat($.grace_note), optional($.chord_symbol), optional($.tuplet_marker), optional($.decoration)), "[", repeat1($.chord_note), "]", optional($.rhythm)),
+    _chord_cstrct: $ => seq(seq(repeat($.grace_note), optional($.chord_symbol), optional($.tuplet_marker), optional($.decoration)), $.open_chord, repeat1($.chord_note), $.close_chord, optional($.rhythm)),
 
     note: $ => seq(choice($._pitch, $.rest), optional($.rhythm)),
     chord_note: $ => seq(repeat($.grace_note), optional($.decoration), $.note),
@@ -216,8 +218,10 @@ module.exports = grammar({
     unit_note_length: _ => "L:",
     user_defined: $ => seq("U:", choice(/[h-w]/, /H-W/), "=", $.symbol),
     voice: _ => "V:",
-    words_line: $ => seq("w:", repeat1($.lyric_text), $._NL, repeat(seq(/\+:/, repeat1($.lyric_text)))),
+    words_tag: _ => "w:",
     words_postbody: _ => "W:",
+
+
 
     body_info_line: $ => prec.left(seq(choice(
       field("type", $.instruction),
@@ -234,7 +238,7 @@ module.exports = grammar({
       field("type", $.unit_note_length),
       field("type", $.user_defined),
       field("type", $.voice),
-      field("type", $.words_line),
+      field("type", $.words_tag),
     ), $.noCommentText, optional($.COMMENT))),
 
     tune_header_info_line: $ => seq(

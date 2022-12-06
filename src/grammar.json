@@ -81,6 +81,14 @@
       "type": "STRING",
       "value": "`"
     },
+    "open_chord": {
+      "type": "STRING",
+      "value": "["
+    },
+    "close_chord": {
+      "type": "STRING",
+      "value": "]"
+    },
     "COMMENT": {
       "type": "PATTERN",
       "value": "%[^%\\n]*"
@@ -559,8 +567,8 @@
           ]
         },
         {
-          "type": "STRING",
-          "value": "["
+          "type": "SYMBOL",
+          "name": "open_chord"
         },
         {
           "type": "REPEAT1",
@@ -570,8 +578,8 @@
           }
         },
         {
-          "type": "STRING",
-          "value": "]"
+          "type": "SYMBOL",
+          "name": "close_chord"
         },
         {
           "type": "CHOICE",
@@ -1779,44 +1787,9 @@
       "type": "STRING",
       "value": "V:"
     },
-    "words_line": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "w:"
-        },
-        {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SYMBOL",
-            "name": "lyric_text"
-          }
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_NL"
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "PATTERN",
-                "value": "\\+:"
-              },
-              {
-                "type": "REPEAT1",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "lyric_text"
-                }
-              }
-            ]
-          }
-        }
-      ]
+    "words_tag": {
+      "type": "STRING",
+      "value": "w:"
     },
     "words_postbody": {
       "type": "STRING",
@@ -1948,7 +1921,7 @@
                 "name": "type",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "words_line"
+                  "name": "words_tag"
                 }
               }
             ]
