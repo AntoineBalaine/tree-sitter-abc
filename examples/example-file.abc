@@ -1,2 +1,15 @@
-X:1
-B>cd BAG |F
+%abc-2.1
+H:This file contains some example English tunes
+% note that the comments (like this one) are to highlight usages
+%  and would not normally be included in such detail
+O:England             % the origin of all tunes is England
+
+X:1                   % tune no 1
+T:Dusty Miller, The   % title
+T:Binny's Jig         % an alternative title
+C:Trad.               % traditional
+R:DH                  % double hornpipe
+M:3/4                 % meter
+K:G                   % key
+B>cd BAG|FA Ac BA|B>cd BAG|DG GB AG:|
+Bdd gfg|aA Ac BA|Bdd gfa|gG GB AG:|

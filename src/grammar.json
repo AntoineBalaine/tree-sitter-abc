@@ -384,45 +384,37 @@
       ]
     },
     "beam": {
-      "type": "PREC_RIGHT",
-      "value": 2,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "SYMBOL",
-            "name": "_nte_or_chrd"
-          },
-          {
-            "type": "REPEAT1",
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "SYMBOL",
-                      "name": "BEAM_SEPARATOR"
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "_nte_or_chrd"
-                }
-              ]
-            }
-          },
-          {
-            "type": "PATTERN",
-            "value": "[\\s]+"
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_nte_or_chrd"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "BEAM_SEPARATOR"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_nte_or_chrd"
+              }
+            ]
           }
-        ]
-      }
+        }
+      ]
     },
     "slur_open": {
       "type": "STRING",
@@ -2368,7 +2360,11 @@
     }
   },
   "extras": [],
-  "conflicts": [],
+  "conflicts": [
+    [
+      "beam"
+    ]
+  ],
   "precedences": [],
   "externals": [],
   "inline": [],

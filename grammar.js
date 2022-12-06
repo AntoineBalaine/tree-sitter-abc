@@ -4,7 +4,7 @@
 module.exports = grammar({
   name: 'abc',
 
-  conflicts: _ => [],
+  conflicts: $ => [[$.beam]],
   extras: _ => [],
   rules: {
     // TODO: add the actual grammar rules
@@ -73,7 +73,12 @@ module.exports = grammar({
     //NOTES
     //the note prefixes can't be included as a rule, since they will match an empty string
     _nte_or_chrd: $ => choice($.note_construct, $._chord_cstrct),
-    beam: $ => prec.right(2, seq($._nte_or_chrd, repeat1(seq(optional($.BEAM_SEPARATOR), $._nte_or_chrd)), /[\s]+/)),
+    beam: $ => seq(
+      $._nte_or_chrd,
+      repeat1(
+        seq(optional($.BEAM_SEPARATOR),
+          $._nte_or_chrd)),
+    ),
 
     slur_open: _ => "(",
     slur_close: _ => ")",
@@ -128,10 +133,17 @@ module.exports = grammar({
     start_of_repeated_section: _ => "|:",
     end_of_repeated_section: _ => ":|",
     start_end_of_two_repeated_sections: _ => "::",
-    generic_bar_line: $ => choice($.thin_double_bar_line, $.close_thin_thick_double_bar_line,
+    generic_bar_line: $ => choice(
+      $.thin_double_bar_line,
+      $.close_thin_thick_double_bar_line,
       $.open_thick_thin_double_bar_line,
       $.start_of_repeated_section, $.end_of_repeated_section,
-      $.start_end_of_two_repeated_sections, $.first_repeat_bar, $.second_repeat_bar, $.bar_line, $.nth_ending_barline),
+      $.start_end_of_two_repeated_sections,
+      $.first_repeat_bar,
+      $.second_repeat_bar,
+      $.bar_line,
+      $.nth_ending_barline
+    ),
     first_repeat_bar: $ => seq($.bar_line, optional(seq(/\s/, "[")), /[0-9]+/),
     second_repeat_bar: $ => seq(($.end_of_repeated_section), optional(seq(/\s/, "[")), /[0-9]+/),
 
