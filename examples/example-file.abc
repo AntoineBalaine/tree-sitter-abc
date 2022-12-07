@@ -28,12 +28,12 @@ M:9/8
 R:SJ                  % slip jig
 N:originally in C     % transcription note
 K:G 
-D|GFG [GAG] G2D|GFG GAG F2D|EFE EFE EFG|A2G F2E D2:| 
+D|GFG [GAG] G2D|GFG GAG F2D|EFE EFE EFG|A2G F2E D2 :| 
 D|GAG GAB d2D|GAG GAB c2D|[1 EFE EFE EFG|A2G F2E D2:|\ % no line-break in score 
 M:12/8                
 [2 E2E EFE E2E EFG|\  % no line-break in score 
 M:9/8                 % change of meter 
-A2G F2E D2|] 
+A2G F2E D2 |] 
 
 X:3
 T:William and Nancy
@@ -47,11 +47,10 @@ D:Morris On                   % can be heard on this record
 P:(AB)2(AC)2A                 % play the parts in this order
 M:6/8
 K:G                        
-abc | 
-[P:A] D|"G"G2G GBd|"C"e2e "G"dBG|"D7"A2d "G"BAG|"C"E2 "D7"F "G"G2:|
-[P:B] d|"G"e2d B2d|"C"gfe "G"d2d| "G"e2d    B2d|"C"gfe    "D7"d2c|
+[P:A] D | "G" G2G GBd|"C"e2e "G"dBG|"D7"A2d "G"BAG|"C"E2 "D7"F "G"G2 :| 
+[P:B] d | "G" e2d B2d|"C"gfe "G"d2d| "G"e2d    B2d|"C"gfe    "D7"d2c|
         "G"B2B Bcd|"C"e2e "G"dBG|"D7"A2d "G"BAG|"C"E2"D7"F "G"G2:|
 % changes of meter, using inline fields 
-       "C"e2 "G"d2|[M:3/8][L:1/8] "G"B2 d |[M:6/8] "C"gfe "D7"d2c|
+       "C"e2 "G"d2|[M:3/8][L:1/8] "G"B2 d |[M:6/8] "C"gfe "D7" d2c|
         "G"B2B Bcd|"C"e2e "G"dBG|"D7"A2d "G"BAG|"C"E2"D7"F "G"G2:| 
 W: hello
