@@ -16,7 +16,7 @@ T:Atholl Brose
 %  score line-breaks (using the $ symbol), rather than using code line breaks to indicate them
 I:linebreak $
 K:D
-{gcd}c<{e}A {gAGAG}A2 {gef}e>A {gAGAG}Ad|
+{/gcd}c<{e}A {gAGAG}A2 {gef}e>A {gAGAG}Ad|
 {gcd}c<{e}A {gAGAG}A>e {ag}a>f {gef}e>d|
 {gcd}c<{e}A {gAGAG}A2 {gef}e>A {gAGAG}Ad|
 {g}c/d/e {g}G>{d}B {gf}gG {dc}d>B:|$
